@@ -12,3 +12,8 @@
 ###> jetbrains/phpstorm ###
 .idea
 ###< jetbrains/phpstorm ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
