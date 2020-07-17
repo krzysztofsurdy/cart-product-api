@@ -1,0 +1,11 @@
+framework:
+    messenger:
+        buses:
+            messenger.bus.command.product: ~
+            messenger.bus.query.product: ~
+            messenger.bus.event.product: ~
+
+        transports:
+            sync: 'sync://'
+
+        default_bus: messenger.bus.command.product

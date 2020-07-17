@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-class GetProductQuery
+final class GetProductQuery
 {
 
 }
