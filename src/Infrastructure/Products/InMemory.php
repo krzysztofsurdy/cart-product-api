@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Products;
@@ -13,7 +14,7 @@ class InMemory implements Products
 
     public function get(string $id): Product
     {
-        if(!isset($this->memory[$id])) {
+        if (!isset($this->memory[$id])) {
             throw new ProductNotFound($id);
         }
 

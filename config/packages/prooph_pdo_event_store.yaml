@@ -2,8 +2,20 @@ services:
     _defaults:
         public: false
 
-    Prooph\EventStore\EventStore: '@app.event_store.default'
+    app.event_store.product:
+        alias: '@app.shared_kernel.action_event_emitter_event_store'
 
+    app.shared_kernel.action_event_emitter_event_store:
+        class: Prooph\EventStore\ActionEventEmitterEventStore
+        factory: ['@app.shared_kernel.event_store', createActionEventEmitterEventStore]
+
+    app.shared_kernel.event_store:
+        class: App\SharedKernel\Aggregate\EventStore
+        arguments:
+            - '@app.event_store.mysql.product'
+            - '@app.event_store.action_event_emitter'
+            - '@app.service_bus.event_bus'
+            - '@messenger.bus.event.product'
     app.event_store.default:
         class: Prooph\EventStore\Pdo\MySqlEventStore
         arguments:
@@ -11,12 +23,33 @@ services:
             - '@app.event_store.pdo_connection.mysql'
             - '@app.event_store.mysql.persistence_strategy'
 
-    app.event_store.pdo_connection.mysql:
-        class: \PDO
+    app.event_store.action_event_emitter:
+        class: Prooph\Common\Event\ProophActionEventEmitter
+
+    app.event_store.mysql.product:
+        class: Prooph\EventStore\Pdo\MySqlEventStore
         arguments:
-            - '%env(MYSQL_DSN)%'
-            - '%env(MYSQL_USER)%'
-            - '%env(MYSQL_PASSWORD)%'
+            - '@prooph_event_store.message_factory'
+            - '@app.event_store.pdo_connection.mysql'
+            - '@app.event_store.mysql.persistence_strategy'
+
+    app.service_bus.event_bus:
+        class: Prooph\ServiceBus\EventBus
+        arguments:
+            - '@app.event_store.action_event_emitter'
+
+    prooph_event_store.message_factory:
+        class: Prooph\Common\Messaging\FQCNMessageFactory
 
     app.event_store.mysql.persistence_strategy:
-        class: Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy
+        class: Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSimpleStreamStrategy
+
+    app.event_store.pdo_connection.mysql:
+        class: PDO
+        factory: ['@doctrine.dbal.default_connection', getWrappedConnection]
+
+    Prooph\EventStore\Projection\ProjectionManager:
+        class: Prooph\EventStore\Pdo\Projection\MySqlProjectionManager
+        arguments:
+            - '@app.shared_kernel.action_event_emitter_event_store'
+            - '@app.event_store.pdo_connection.mysql'

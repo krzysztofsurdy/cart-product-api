@@ -10,14 +10,19 @@ services:
             $productCommandBus: '@messenger.bus.command.product'
             $productQueryBus: '@messenger.bus.query.product'
             $productEventStreamName: '%product.event_stream.name%'
-            $productEventStore: '@api.shared_kernel.action_event_emitter_event_store'
-            $productSnapshotStore: '@api.snapshot_store.offer'
+            $productEventStore: '@app.shared_kernel.action_event_emitter_event_store'
+            $productSnapshotStore: '@app.snapshot_store.offer'
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Tests,Kernel.php}'
-    App\API\:
-        resource: '../src/API'
+
+    App\Controller\:
+        resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\SharedKernel\EventListener\UnhandledExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
 
-
+    App\Infrastructure\Products:
+        class: App\Infrastructure\Products\InMemory

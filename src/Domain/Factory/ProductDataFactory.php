@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Domain\Factory;
 
-use App\Domain\Exception\ProductDataFieldNotFound;
+use App\Domain\Exception\FieldNotFoundException;
+use App\Domain\ProductData;
 
 trait ProductDataFactory
 {
@@ -12,16 +14,18 @@ trait ProductDataFactory
         $productData = new ProductData();
 
         foreach ($data as $key => $value) {
-            if(empty($value) && $value !== 0) {
+            if (empty($value) && 0 !== $value) {
                 $value = null;
             }
 
             if (!property_exists(self::class, $key)) {
-                throw new ProductDataFieldNotFound($key);
+                throw new FieldNotFoundException(self::class, $key);
             }
 
             $productData->{$key} = $value;
         }
+
+        return $productData;
     }
 
     public function serialize(): array

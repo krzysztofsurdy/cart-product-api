@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace App\SharedKernel;
+namespace App\SharedKernel\Aggregate;
 
 use App\SharedKernel\Exception\MethodNotExistingInAggregateException;
 use Prooph\EventSourcing\AggregateChanged;

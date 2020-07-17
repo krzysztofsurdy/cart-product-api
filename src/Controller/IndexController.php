@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
-namespace App\API;
+namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +14,9 @@ class IndexController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
-     * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
-        // TODO IMPLEMENT
+        return new JsonResponse(['ok']);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\SharedKernel\Event;
@@ -9,10 +10,7 @@ class EventStoreEvent extends AggregateChanged
 {
     public function init(): void
     {
-        if(!$this->createdAt) {
-            $this->createdAt = new \DateTimeImmutable();
-        }
-
+        $this->createdAt = new \DateTimeImmutable();
         parent::init();
     }
 }

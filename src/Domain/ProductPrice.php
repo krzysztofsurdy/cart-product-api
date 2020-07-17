@@ -1,18 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain;
 
-class ProductPrice
+use App\Domain\Factory\ProductPriceFactory;
+
+class ProductPrice implements \JsonSerializable
 {
+    use ProductPriceFactory;
+
     private ProductPriceCurrency $currency;
     private float $value;
-
-    public function __construct(ProductPriceCurrency $currency, float $value)
-    {
-        $this->currency = $currency;
-        $this->value = $value;
-    }
 
     public function getCurrency(): ProductPriceCurrency
     {
@@ -22,5 +21,13 @@ class ProductPrice
     public function getValue(): float
     {
         return $this->value;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'value' => $this->value,
+            'currency' => $this->currency->jsonSerialize(),
+        ];
     }
 }
