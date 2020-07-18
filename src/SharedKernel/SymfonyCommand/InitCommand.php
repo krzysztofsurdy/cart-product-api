@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class InitCommand extends Command
 {
-    protected static $defaultName = 'system:initialization';
+    protected static $defaultName = 'system:init';
 
     private ProductService $productService;
 
@@ -23,6 +23,9 @@ class InitCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $migrateCommand = $this->getApplication()->find('doctrine:migrations:migrate');
+        $migrateCommand->run($input, $output);
+
         foreach ($this->provideInitProducts() as $productData) {
             $this->productService->add(ProductAddRequestDTO::createFromArray($productData));
         }
@@ -52,7 +55,7 @@ class InitCommand extends Command
             [
                 'name'  => 'Bloodborne',
                 'price' => 5.99
-            ],
+            ]
         ];
     }
 }

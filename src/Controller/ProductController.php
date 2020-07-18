@@ -9,13 +9,12 @@ use App\Application\DTO\ProductDeleteRequestDTO;
 use App\Application\DTO\ProductGetRequestDTO;
 use App\Application\DTO\ProductUpdateRequestDTO;
 use App\Application\Service\ProductService;
-use App\SharedKernel\Response\SuccessResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ProductController extends AbstractController
+class ProductController extends CoreController
 {
     private ProductService $productService;
 
@@ -32,7 +31,11 @@ class ProductController extends AbstractController
         $payload = ProductGetRequestDTO::createFromArray(['id' => $id]);
         $product = $this->productService->get($payload);
 
-        return new SuccessResponse($product->jsonSerialize());
+        return $this->createApiResponse(
+            true,
+            $product->jsonSerialize(),
+            JsonResponse::HTTP_OK
+        );
     }
 
     /**
@@ -42,7 +45,11 @@ class ProductController extends AbstractController
     {
         $product = $this->productService->get($payload);
 
-        return new SuccessResponse($product->jsonSerialize());
+        return $this->createApiResponse(
+            true,
+            $product->jsonSerialize(),
+            JsonResponse::HTTP_OK
+        );
     }
 
     /**
@@ -55,7 +62,11 @@ class ProductController extends AbstractController
 
         $this->productService->add($payload);
 
-        return new SuccessResponse();
+        return $this->createApiResponse(
+            true,
+            null,
+            JsonResponse::HTTP_NO_CONTENT
+        );
     }
 
     /**
@@ -66,7 +77,11 @@ class ProductController extends AbstractController
         $payload = ProductDeleteRequestDTO::createFromArray(['id' => $id]);
         $this->productService->delete($payload);
 
-        return new SuccessResponse();
+        return $this->createApiResponse(
+            true,
+            null,
+            JsonResponse::HTTP_NO_CONTENT
+        );
     }
 
     /**
@@ -78,6 +93,10 @@ class ProductController extends AbstractController
         $payload = ProductUpdateRequestDTO::createFromArray($payload);
         $this->productService->update($payload);
 
-        return new SuccessResponse();
+        return $this->createApiResponse(
+            true,
+            null,
+            JsonResponse::HTTP_NO_CONTENT
+        );
     }
 }
