@@ -8,15 +8,17 @@ use App\SharedKernel\Event\ProductEvent;
 
 class ProductNameChanged extends ProductEvent
 {
+    private const LABEL_NAME = 'name';
+
     public static function createFor(string $id, string $name)
     {
         return new self($id, [
-           'name' => $name,
+            self::LABEL_NAME => $name,
         ]);
     }
 
     public function getName(): string
     {
-        return $this->payload['name'];
+        return $this->payload[self::LABEL_NAME];
     }
 }

@@ -12,6 +12,9 @@ final class AddProductCommand
     /** @var ProductPrice[] */
     private array $prices;
 
+    /**
+     * @param ProductPrice[] $prices
+     */
     public function __construct(string $name, array $prices)
     {
         $this->name = $name;

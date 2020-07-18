@@ -7,12 +7,15 @@ namespace App\Application\Service;
 use App\Application\Command\AddProductCommand;
 use App\Application\Command\DeleteProductCommand;
 use App\Application\Command\UpdateProductCommand;
+use App\Application\DTO\ProductAddRequestDTO;
+use App\Application\DTO\ProductDeleteRequestDTO;
+use App\Application\DTO\ProductGetRequestDTO;
+use App\Application\DTO\ProductUpdateRequestDTO;
 use App\Application\Query\GetProductQuery;
 use App\Domain\Product;
 use App\Domain\ProductData;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Webmozart\Assert\Assert;
 
 class ProductService
 {
@@ -25,9 +28,9 @@ class ProductService
         $this->productCommandBus = $productCommandBus;
     }
 
-    public function get(string $id): Product
+    public function get(ProductGetRequestDTO $requestDTO): Product
     {
-        $envelope = $this->productQueryBus->dispatch(new GetProductQuery($id));
+        $envelope = $this->productQueryBus->dispatch(new GetProductQuery($requestDTO->getId()));
 
         /** @var HandledStamp $handledStamp */
         $handledStamp = $envelope->last(HandledStamp::class);
@@ -35,32 +38,23 @@ class ProductService
         return $handledStamp->getResult();
     }
 
-    public function add(array $data): void
+    public function add(ProductAddRequestDTO $requestDTO): void
     {
-        Assert::keyExists($data, 'name');
-        Assert::keyExists($data, 'prices');
-
-        $this->productCommandBus->dispatch(new AddProductCommand($data['name'], $data['prices']));
+        $this->productCommandBus->dispatch(new AddProductCommand($requestDTO->getName(), $requestDTO->getPrices()));
     }
 
-    public function delete(string $id): void
+    public function delete(ProductDeleteRequestDTO $requestDTO): void
     {
-        $this->productCommandBus->dispatch(new DeleteProductCommand($id));
+        $this->productCommandBus->dispatch(new DeleteProductCommand($requestDTO->getId()));
     }
 
-    public function update(array $data): void
+    public function update(ProductUpdateRequestDTO $requestDTO): void
     {
-        Assert::keyExists($data, 'id');
-
-        $commandData = [];
-
-        if (isset($data['name'])) {
-            $commandData['name'] = $data['name'];
-        }
-
-        if (isset($data['prices'])) {
-            $commandData['price'] = $data['prices'];
-        }
-        $this->productCommandBus->dispatch(new UpdateProductCommand($data['id'], ProductData::createFromArray($commandData)));
+        $this->productCommandBus->dispatch(
+            new UpdateProductCommand(
+                $requestDTO->getId(),
+                ProductData::createFromArray($requestDTO->serialize())
+            )
+        );
     }
 }

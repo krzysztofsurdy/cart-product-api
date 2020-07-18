@@ -5,9 +5,12 @@
         "php": "^7.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
+        "doctrine/migrations": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan": "^0.12.32",
         "phpunit/phpunit": "^9.2",
+        "predis/predis": "^1.1",
         "prooph/event-sourcing": "^5.6",
         "prooph/event-store": "^7.5",
         "prooph/event-store-bus-bridge": "^3.3",
@@ -60,7 +63,12 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "phpstan": [
+            "@php bin/console cache:warmup --env=dev",
+            "@phpstan-general"
+        ],
+        "phpstan-general": "vendor/bin/phpstan analyse -c phpstan.neon src --level 5 --no-progress --memory-limit=0"
     },
     "conflict": {
         "symfony/symfony": "*"

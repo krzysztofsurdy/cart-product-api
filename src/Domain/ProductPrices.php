@@ -6,13 +6,17 @@ namespace App\Domain;
 
 use App\Domain\Exception\ProductPriceAlreadyExistsException;
 use App\Domain\Exception\ProductPriceNotFoundException;
+use JsonSerializable;
 
-class ProductPrices implements \JsonSerializable
+class ProductPrices implements JsonSerializable
 {
     /** @var ProductPrice[] */
     private array $prices;
 
-    public function __construct($prices)
+    /**
+     * @param ProductPrice[] $prices
+     */
+    public function __construct(array $prices)
     {
         $this->prices = $prices;
     }
@@ -50,9 +54,9 @@ class ProductPrices implements \JsonSerializable
 
         foreach ($this->prices as $price) {
             $jsonSerializable[] = [
-                'currencyId' => $price->getCurrency()->getId(),
-                'currencyName' => $price->getCurrency()->getName(),
-                'value' => $price->getValue(),
+                ProductPriceCurrency::LABEL_ID => $price->getCurrency()->getId(),
+                ProductPriceCurrency::LABEL_NAME => $price->getCurrency()->getName(),
+                ProductPrice::LABEL_VALUE_ => $price->getValue(),
             ];
         }
 

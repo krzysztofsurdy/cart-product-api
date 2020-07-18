@@ -9,15 +9,17 @@ use App\SharedKernel\Event\ProductEvent;
 
 class ProductCreated extends ProductEvent
 {
+    private const LABEL_PRODUCT_DATA = 'product_data';
+
     public static function createFor(string $productId, ProductData $productData)
     {
         return new self($productId, [
-            'product_data' => $productData->serialize(),
+            self::LABEL_PRODUCT_DATA => $productData->serialize(),
         ]);
     }
 
     public function getProductData(): ProductData
     {
-        return ProductData::createFromArray($this->payload['product_data']);
+        return ProductData::createFromArray($this->payload[self::LABEL_PRODUCT_DATA]);
     }
 }

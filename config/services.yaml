@@ -20,9 +20,15 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    Predis\ClientInterface:
+        alias: snc_redis.default
+
     App\SharedKernel\EventListener\UnhandledExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
-    App\Infrastructure\Products:
-        class: App\Infrastructure\Products\InMemory
+    App\Infrastructure\ProductRepositoryInterface:
+        class: App\Infrastructure\ProductRepository\EventStore
+
+    App\Infrastructure\ProductViewRepositoryInterface:
+        class: App\Infrastructure\ProductRepository\PDO

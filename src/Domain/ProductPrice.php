@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Domain;
 
 use App\Domain\Factory\ProductPriceFactory;
+use JsonSerializable;
 
-class ProductPrice implements \JsonSerializable
+class ProductPrice implements JsonSerializable
 {
     use ProductPriceFactory;
 
+    public const LABEL_VALUE_ = 'value';
+    public const LABEL_CURRENCY = 'currency';
     private ProductPriceCurrency $currency;
     private float $value;
 
@@ -26,8 +29,8 @@ class ProductPrice implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'value' => $this->value,
-            'currency' => $this->currency->jsonSerialize(),
+            self::LABEL_VALUE_ => $this->value,
+            self::LABEL_CURRENCY => $this->currency->jsonSerialize(),
         ];
     }
 }

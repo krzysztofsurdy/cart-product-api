@@ -7,14 +7,14 @@ namespace App\Domain\CommandHandler;
 use App\Application\Command\AddProductCommand;
 use App\Domain\Product;
 use App\Domain\ProductData;
-use App\Infrastructure\Products;
+use App\Infrastructure\ProductRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class AddProductCommandHandler implements MessageHandlerInterface
 {
-    private Products $products;
+    private ProductRepositoryInterface $products;
 
-    public function __construct(Products $products)
+    public function __construct(ProductRepositoryInterface $products)
     {
         $this->products = $products;
     }

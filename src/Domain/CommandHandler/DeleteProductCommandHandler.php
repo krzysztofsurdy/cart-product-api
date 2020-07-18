@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Domain\CommandHandler;
 
 use App\Application\Command\DeleteProductCommand;
-use App\Infrastructure\Products;
+use App\Infrastructure\ProductRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class DeleteProductCommandHandler implements MessageHandlerInterface
 {
-    private Products $products;
+    private ProductRepositoryInterface $products;
 
-    public function __construct(Products $products)
+    public function __construct(ProductRepositoryInterface $products)
     {
         $this->products = $products;
     }

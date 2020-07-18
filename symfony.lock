@@ -47,6 +47,19 @@
             "src/Repository/.gitignore"
         ]
     },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "baaa439e3e3179e69e3da84b671f0a3e4a2f56ad"
+        },
+        "files": [
+            "config/packages/doctrine_migrations.yaml",
+            "migrations/.gitignore"
+        ]
+    },
     "doctrine/event-manager": {
         "version": "1.1.0"
     },
@@ -55,6 +68,9 @@
     },
     "doctrine/lexer": {
         "version": "1.2.1"
+    },
+    "doctrine/migrations": {
+        "version": "3.0.1"
     },
     "doctrine/persistence": {
         "version": "1.3.7"
@@ -77,6 +93,15 @@
             ".php_cs.dist"
         ]
     },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.2.1"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.4"
+    },
     "marc-mabe/php-enum": {
         "version": "v4.3.0"
     },
@@ -85,6 +110,12 @@
     },
     "myclabs/php-enum": {
         "version": "1.7.6"
+    },
+    "ocramius/package-versions": {
+        "version": "1.9.0"
+    },
+    "ocramius/proxy-manager": {
+        "version": "2.8.1"
     },
     "phar-io/manifest": {
         "version": "1.0.3"
@@ -144,6 +175,9 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
+    },
+    "predis/predis": {
+        "version": "v1.1.1"
     },
     "prooph/common": {
         "version": "v4.4.0"
@@ -251,6 +285,18 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "snc/redis-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "85bbdb3d2db531e20874de29bab0587f93604fa8"
+        },
+        "files": [
+            "config/packages/snc_redis.yaml"
         ]
     },
     "symfony/amqp-messenger": {
@@ -448,6 +494,9 @@
     },
     "twig/twig": {
         "version": "v3.0.4"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.9.1"

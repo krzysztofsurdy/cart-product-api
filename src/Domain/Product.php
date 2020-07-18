@@ -4,33 +4,42 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-use App\Domain\Compare\ProductComparer;
+use App\Domain\Compare\ProductComparerInterface;
 use App\Domain\Event\ProductCreated;
 use App\Domain\Event\ProductDeleted;
 use App\Domain\Event\ProductNameChanged;
 use App\Domain\Event\ProductPriceChanged;
 use App\SharedKernel\Aggregate\AggregateRootApply;
+use App\SharedKernel\Dictionary\DateFormat;
+use DateTimeInterface;
+use JsonSerializable;
 use Prooph\EventSourcing\AggregateRoot;
 use Ramsey\Uuid\Uuid;
 
-class Product extends AggregateRoot implements Comparable, \JsonSerializable
+class Product extends AggregateRoot implements ComparableInterface, JsonSerializable
 {
     use AggregateRootApply;
+
+    private const LABEL_ID = 'id';
+    private const LABEL_NAME = 'name';
+    private const LABEL_PRICES = 'prices';
+    private const LABEL_CREATED_AT = 'created_at';
+    private const LABEL_DELETED_AT = 'deleted_at';
 
     private string $id;
     private string $name;
     private ProductPrices $prices;
-    private \DateTimeInterface $createdAt;
-    private ?\DateTimeInterface $deletedAt;
+    private DateTimeInterface $createdAt;
+    private ?DateTimeInterface $deletedAt;
 
     protected function aggregateId(): string
     {
         return $this->id;
     }
 
-    public function getComparer(): Comparer
+    public function getComparer(): ComparerInterface
     {
-        return new ProductComparer($this);
+        return new ProductComparerInterface($this);
     }
 
     public static function create(ProductData $productData): Product
@@ -103,11 +112,11 @@ class Product extends AggregateRoot implements Comparable, \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'prices' => $this->prices->jsonSerialize(),
-            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
-            'deleted_at' => $this->deletedAt->format('Y-m-d H:i:s'),
+            self::LABEL_ID => $this->id,
+            self::LABEL_NAME => $this->name,
+            self::LABEL_PRICES => $this->prices->jsonSerialize(),
+            self::LABEL_CREATED_AT => $this->createdAt->format(DateFormat::DEFAULT),
+            self::LABEL_DELETED_AT => $this->deletedAt ? $this->deletedAt->format(DateFormat::DEFAULT) : null,
         ];
     }
 
