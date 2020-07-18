@@ -11,11 +11,11 @@ class ProductUpdateRequestDTO
     use ProductUpdateRequestDTOFactory;
 
     private const LABEL_NAME = 'name';
-    private const LABEL_PRICES = 'prices';
+    private const LABEL_PRICE = 'price';
 
     private string $id;
     private ?string $name;
-    private ?array $prices;
+    private ?float $price;
 
     public function getId(): string
     {
@@ -27,11 +27,6 @@ class ProductUpdateRequestDTO
         return $this->name;
     }
 
-    public function getPrices(): ?array
-    {
-        return $this->prices;
-    }
-
     public function serialize(): array
     {
         $output = [];
@@ -40,8 +35,8 @@ class ProductUpdateRequestDTO
             $output[self::LABEL_NAME] = $this->name;
         }
 
-        if ($this->prices) {
-            $output[self::LABEL_PRICES] = $this->prices;
+        if ($this->price) {
+            $output[self::LABEL_PRICE] = $this->price;
         }
 
         return $output;

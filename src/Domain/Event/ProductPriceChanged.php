@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Event;
 
-use App\Domain\ProductPrice;
 use App\SharedKernel\Event\ProductEvent;
 
 class ProductPriceChanged extends ProductEvent
 {
-    private const LABEL_PRODUCT_PRICE = 'product_price';
+    private const LABEL_PRICE = 'price';
 
-    public static function createFor(string $productId, ProductPrice $price)
+    public static function createFor(string $productId, float $value)
     {
         return new self($productId, [
-            self::LABEL_PRODUCT_PRICE => $price->jsonSerialize(),
+            self::LABEL_PRICE => $value,
         ]);
     }
 
-    public function getProductPrice(): ProductPrice
+    public function getPrice(): float
     {
-        return ProductPrice::createFromArray($this->payload[self::LABEL_PRODUCT_PRICE]);
+        return $this->payload[self::LABEL_PRICE];
     }
 }

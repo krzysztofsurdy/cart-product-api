@@ -14,7 +14,6 @@ class FailResponse extends JsonResponse
         parent::__construct([
             'status' => 'FAILED',
             'message' => $message,
-            'code' => 'ErrorException',
         ], Response::HTTP_BAD_REQUEST);
     }
 }

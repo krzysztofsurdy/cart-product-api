@@ -4,21 +4,15 @@ declare(strict_types=1);
 
 namespace App\Application\Command;
 
-use App\Domain\ProductPrice;
-
 final class AddProductCommand
 {
     private string $name;
-    /** @var ProductPrice[] */
-    private array $prices;
+    private float $price;
 
-    /**
-     * @param ProductPrice[] $prices
-     */
-    public function __construct(string $name, array $prices)
+    public function __construct(string $name, float $price)
     {
         $this->name = $name;
-        $this->prices = $prices;
+        $this->price = $price;
     }
 
     public function getName(): string
@@ -26,8 +20,8 @@ final class AddProductCommand
         return $this->name;
     }
 
-    public function getPrices(): array
+    public function getPrice(): float
     {
-        return $this->prices;
+        return $this->price;
     }
 }

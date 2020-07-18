@@ -40,7 +40,7 @@ class ProductService
 
     public function add(ProductAddRequestDTO $requestDTO): void
     {
-        $this->productCommandBus->dispatch(new AddProductCommand($requestDTO->getName(), $requestDTO->getPrices()));
+        $this->productCommandBus->dispatch(new AddProductCommand($requestDTO->getName(), $requestDTO->getPrice()));
     }
 
     public function delete(ProductDeleteRequestDTO $requestDTO): void

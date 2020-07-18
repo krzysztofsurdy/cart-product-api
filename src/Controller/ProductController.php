@@ -27,9 +27,19 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{id}", methods={"GET"}, name="product_get")
      */
-    public function getProductAction(Request $request): Response
+    public function getProductAction(string $id): Response
     {
-        $payload = ProductGetRequestDTO::createFromArray($request->query->all());
+        $payload = ProductGetRequestDTO::createFromArray(['id' => $id]);
+        $product = $this->productService->get($payload);
+
+        return new SuccessResponse($product->jsonSerialize());
+    }
+
+    /**
+     * @Route("/product", methods={"GET"}, name="products_get")
+     */
+    public function getProductsAction(Request $request): Response
+    {
         $product = $this->productService->get($payload);
 
         return new SuccessResponse($product->jsonSerialize());
@@ -51,9 +61,9 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{id}", methods={"DELETE"}, name="product_delete")
      */
-    public function deleteProductAction(Request $request): Response
+    public function deleteProductAction(string $id): Response
     {
-        $payload = ProductDeleteRequestDTO::createFromArray($request->query->all());
+        $payload = ProductDeleteRequestDTO::createFromArray(['id' => $id]);
         $this->productService->delete($payload);
 
         return new SuccessResponse();

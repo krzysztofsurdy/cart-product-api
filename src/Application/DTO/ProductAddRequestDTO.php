@@ -11,15 +11,15 @@ class ProductAddRequestDTO
     use ProductAddRequestDTOFactory;
 
     private string $name;
-    private array $prices;
+    private float $price;
 
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function getPrices(): array
+    public function getPrice(): float
     {
-        return $this->prices;
+        return $this->price;
     }
 }

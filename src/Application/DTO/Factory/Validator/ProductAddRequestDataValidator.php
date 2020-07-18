@@ -17,9 +17,8 @@ class ProductAddRequestDataValidator implements ValidatorInterface
         Assert::string($data['name']);
         Assert::minLength($data['name'], 1);
 
-        Assert::keyExists($data, 'prices');
-        Assert::notNull($data['prices']);
-        Assert::isArray($data['prices']);
-        Assert::minCount($data['prices'], 1);
+        Assert::keyExists($data, 'price');
+        Assert::notNull($data['price']);
+        Assert::greaterThanEq($data['price'], 0);
     }
 }

@@ -10,7 +10,7 @@ services:
         factory: ['@app.shared_kernel.event_store', createActionEventEmitterEventStore]
 
     app.shared_kernel.event_store:
-        class: App\SharedKernel\Aggregate\EventStore
+        class: App\SharedKernel\EventStore
         arguments:
             - '@app.event_store.mysql.product'
             - '@app.event_store.action_event_emitter'

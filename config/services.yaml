@@ -31,4 +31,4 @@ services:
         class: App\Infrastructure\ProductRepository\EventStore
 
     App\Infrastructure\ProductViewRepositoryInterface:
-        class: App\Infrastructure\ProductRepository\PDO
+        class: App\Infrastructure\ProductViewRepository\PDO

@@ -11,15 +11,21 @@ class ProductData
     use ProductDataFactory;
 
     private ?string $name;
-    private ?ProductPrices $prices;
+    private ?float $price;
+    private ?Currency $currency;
 
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getPrices(): ?ProductPrices
+    public function getPrice(): ?float
     {
-        return $this->prices;
+        return $this->price;
+    }
+
+    public function getCurrency(): ?Currency
+    {
+        return $this->currency;
     }
 }

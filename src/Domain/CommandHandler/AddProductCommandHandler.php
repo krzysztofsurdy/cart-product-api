@@ -23,7 +23,7 @@ class AddProductCommandHandler implements MessageHandlerInterface
     {
         $product = Product::create(ProductData::createFromArray([
             'name' => $command->getName(),
-            'prices' => $command->getPrices(),
+            'price' => $command->getPrice(),
         ]));
 
         $this->products->save($product);

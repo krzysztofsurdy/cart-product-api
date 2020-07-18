@@ -18,10 +18,9 @@ class ProductUpdateRequestDTODataValidator implements ValidatorInterface
             Assert::minLength($data['name'], 1);
         }
 
-        if (isset($data['prices'])) {
-            Assert::notNull($data['prices']);
-            Assert::isArray($data['prices']);
-            Assert::minCount($data['prices'], 1);
+        if (isset($data['price'])) {
+            Assert::notNull($data['price']);
+            Assert::greaterThanEq($data['price'], 0);
         }
     }
 }

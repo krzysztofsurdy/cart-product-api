@@ -7,14 +7,11 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20200718140652 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return '';
+        return 'Added event_streams table';
     }
 
     public function up(Schema $schema) : void
@@ -31,24 +28,10 @@ final class Version20200718140652 extends AbstractMigration
               KEY `ix_cat` (`category`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
         ');
-
-        $this->addSql('
-            CREATE TABLE `projections` (
-              `no` BIGINT(20) NOT NULL AUTO_INCREMENT,
-              `name` VARCHAR(150) NOT NULL,
-              `position` JSON,
-              `state` JSON,
-              `status` VARCHAR(28) NOT NULL,
-              `locked_until` CHAR(26),
-              PRIMARY KEY (`no`),
-              UNIQUE KEY `ix_name` (`name`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-        ');
     }
 
     public function down(Schema $schema) : void
     {
         $this->addSql('DROP TABLE event_streams;');
-        $this->addSql('DROP TABLE projections;');
     }
 }

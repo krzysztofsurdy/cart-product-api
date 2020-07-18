@@ -7,9 +7,8 @@ namespace App\Domain\Compare;
 use App\Domain\ComparerInterface;
 use App\Domain\Product;
 use App\Domain\ProductData;
-use App\Domain\ProductPrice;
 
-class ProductComparerInterface implements ComparerInterface
+class ProductComparer implements ComparerInterface
 {
     private Product $product;
 
@@ -20,17 +19,12 @@ class ProductComparerInterface implements ComparerInterface
 
     public function compare(ProductData $productData): void
     {
-        if (null !== $this->product->getName()) {
+        if ($productData->getName() && $this->product->getName() !== $productData->getName()) {
             $this->product->changeName($productData->getName());
         }
 
-        if ($productData->getPrices()) {
-            /** @var ProductPrice[] $prices */
-            $prices = $productData->getPrices();
-
-            foreach ($prices as $price) {
-                $this->product->changePrice($price);
-            }
+        if ($productData->getPrice() && $this->product->getPrice() !== $productData->getPrices()) {
+            $this->product->changePrice($productData->getPrice());
         }
     }
 }
