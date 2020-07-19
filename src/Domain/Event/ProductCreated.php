@@ -11,7 +11,7 @@ class ProductCreated extends ProductEvent
 {
     private const LABEL_PRODUCT_DATA = 'product_data';
 
-    public static function createFor(string $productId, ProductData $productData)
+    public static function createFor(string $productId, ProductData $productData): ProductCreated
     {
         return new self($productId, [
             self::LABEL_PRODUCT_DATA => $productData->serialize(),

@@ -10,7 +10,7 @@ class ProductPriceChanged extends ProductEvent
 {
     private const LABEL_PRICE = 'price';
 
-    public static function createFor(string $productId, float $value)
+    public static function createFor(string $productId, float $value): ProductPriceChanged
     {
         return new self($productId, [
             self::LABEL_PRICE => $value,

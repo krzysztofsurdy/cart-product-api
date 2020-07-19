@@ -20,12 +20,11 @@ class Product extends AggregateRoot implements ComparableInterface, JsonSerializ
 {
     use AggregateRootApply;
 
-    private const LABEL_ID = 'id';
-    private const LABEL_NAME = 'name';
-    private const LABEL_PRICE = 'price';
-    private const LABEL_CURRENCY = 'currency';
-    private const LABEL_CREATED_AT = 'created_at';
-    private const LABEL_DELETED_AT = 'deleted_at';
+    public const LABEL_ID = 'id';
+    public const LABEL_NAME = 'name';
+    public const LABEL_PRICE = 'price';
+    public const LABEL_CREATED_AT = 'created_at';
+    public const LABEL_DELETED_AT = 'deleted_at';
 
     private string $id;
     private string $name;

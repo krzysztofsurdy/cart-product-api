@@ -23,7 +23,7 @@ class ProductComparer implements ComparerInterface
             $this->product->changeName($productData->getName());
         }
 
-        if ($productData->getPrice() && $this->product->getPrice() !== $productData->getPrices()) {
+        if ($productData->getPrice() && $this->product->getPrice() !== $productData->getPrice()) {
             $this->product->changePrice($productData->getPrice());
         }
     }

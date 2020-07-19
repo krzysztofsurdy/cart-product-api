@@ -24,79 +24,80 @@ class ProductController extends CoreController
     }
 
     /**
-     * @Route("/product/{id}", methods={"GET"}, name="product_get")
-     */
-    public function getProductAction(string $id): Response
-    {
-        $payload = ProductGetRequestDTO::createFromArray(['id' => $id]);
-        $product = $this->productService->get($payload);
-
-        return $this->createApiResponse(
-            true,
-            $product->jsonSerialize(),
-            JsonResponse::HTTP_OK
-        );
-    }
-
-    /**
-     * @Route("/product", methods={"GET"}, name="products_get")
+     * @Route("/api/product", methods={"GET"}, name="products_get")
      */
     public function getProductsAction(Request $request): Response
     {
-        $product = $this->productService->get($payload);
+        try {
+            $payload = ProductGetRequestDTO::createFromArray($request->query->all());
+            $products = $this->productService->get($payload);
 
-        return $this->createApiResponse(
-            true,
-            $product->jsonSerialize(),
-            JsonResponse::HTTP_OK
-        );
+            return self::createSuccessApiResponse(
+                $products->serialize(),
+                JsonResponse::HTTP_OK
+            );
+        } catch (\Throwable $exception) {
+            return self::createFailApiResponse($exception);
+        }
     }
 
     /**
-     * @Route("/product", methods={"POST"}, name="product_add")
+     * @Route("/api/product", methods={"POST"}, name="product_add")
      */
     public function addProductAction(Request $request): Response
     {
-        $payload = json_decode($request->getContent(), true);
-        $payload = ProductAddRequestDTO::createFromArray($payload);
+        try {
+            $content = $request->getContent();
+            $payload = json_decode(is_string($content) ? $content : '', true);
+            $payload = ProductAddRequestDTO::createFromArray($payload);
 
-        $this->productService->add($payload);
+            $this->productService->add($payload);
 
-        return $this->createApiResponse(
-            true,
-            null,
-            JsonResponse::HTTP_NO_CONTENT
-        );
+
+            return self::createSuccessApiResponse(
+                null,
+                JsonResponse::HTTP_OK
+            );
+        } catch (\Throwable $exception) {
+            return self::createFailApiResponse($exception);
+        }
     }
 
     /**
-     * @Route("/product/{id}", methods={"DELETE"}, name="product_delete")
+     * @Route("/api/product/{id}", methods={"DELETE"}, name="product_get")
      */
     public function deleteProductAction(string $id): Response
     {
-        $payload = ProductDeleteRequestDTO::createFromArray(['id' => $id]);
-        $this->productService->delete($payload);
+        try {
+            $payload = ProductDeleteRequestDTO::createFromArray(['id' => $id]);
+            $this->productService->delete($payload);
 
-        return $this->createApiResponse(
-            true,
-            null,
-            JsonResponse::HTTP_NO_CONTENT
-        );
+            return self::createSuccessApiResponse(
+                null,
+                JsonResponse::HTTP_OK
+            );
+        } catch (\Throwable $exception) {
+            return self::createFailApiResponse($exception);
+        }
     }
 
     /**
-     * @Route("/product", methods={"PUT"}, name="product_update")
+     * @Route("/api/product", methods={"PUT"}, name="product_update")
      */
     public function updateProductAction(Request $request): Response
     {
-        $payload = json_decode($request->getContent(), true);
-        $payload = ProductUpdateRequestDTO::createFromArray($payload);
-        $this->productService->update($payload);
+        try {
+            $content = $request->getContent();
+            $payload = json_decode(is_string($content) ? $content : '', true);
+            $payload = ProductUpdateRequestDTO::createFromArray($payload);
+            $this->productService->update($payload);
 
-        return $this->createApiResponse(
-            true,
-            null,
-            JsonResponse::HTTP_NO_CONTENT
-        );
+            return self::createSuccessApiResponse(
+                null,
+                JsonResponse::HTTP_OK
+            );
+        } catch (\Throwable $exception) {
+            return self::createFailApiResponse($exception);
+        }
     }
 }

@@ -3,40 +3,84 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ProductViewRepository;
 
+use App\Domain\Exception\ProductWithNameAlreadyExistsException;
+use App\Domain\Product;
 use App\Domain\ProductData;
+use App\Infrastructure\Exception\ProductNotFoundException;
 use App\Infrastructure\ProductViewRepositoryInterface;
+use App\SharedKernel\Dictionary\DateFormat;
 use DateTimeInterface;
 
 class InMemory implements ProductViewRepositoryInterface
 {
-    public function get(string $id): array
+    private array $memory = [];
+
+    public function get(int $page, int $limit): array
     {
-        // TODO: Implement get() method.
+        return $this->memory;
     }
+
+    public function total(): int
+    {
+        return count($this->memory);
+    }
+
 
     public function getByName(string $name): ?array
     {
-        // TODO: Implement getByName() method.
+        foreach ($this->memory as $product) {
+            if ($product[Product::LABEL_NAME] === $name) {
+                return $product;
+            }
+        }
+
+        throw new ProductNotFoundException($name);
     }
 
     public function add(string $id, ProductData $productData, DateTimeInterface $createdAt): void
     {
-        // TODO: Implement add() method.
+        foreach ($this->memory as $product) {
+            if ($product[Product::LABEL_NAME] === $productData->getName()) {
+                throw new ProductWithNameAlreadyExistsException($productData->getName());
+            }
+        }
+
+        $this->memory[$id] = [
+            array_merge(
+                $productData->serialize(),
+                [
+                    Product::LABEL_CREATED_AT => $createdAt->format(DateFormat::DEFAULT),
+                    Product::LABEL_DELETED_AT => null
+                ]
+            )
+        ];
     }
 
     public function markDeleted(string $id, DateTimeInterface $deletedAt): void
     {
-        // TODO: Implement markDeleted() method.
+        if (!isset($this->memory[$id])) {
+            throw new ProductNotFoundException($id);
+        }
+
+        $this->memory[$id][Product::LABEL_DELETED_AT] = $deletedAt->format(DateFormat::DEFAULT);
     }
 
 
     public function changeName(string $id, string $name): void
     {
-        // TODO: Implement changeName() method.
+        if (!isset($this->memory[$id])) {
+            throw new ProductNotFoundException($id);
+        }
+
+        $this->memory[$id][Product::LABEL_NAME] = $name;
     }
 
     public function changePrice(string $id, float $price): void
     {
-        // TODO: Implement changePrice() method.
+        if (!isset($this->memory[$id])) {
+            throw new ProductNotFoundException($id);
+        }
+
+        $this->memory[$id][Product::LABEL_PRICE] = $price;
     }
 }

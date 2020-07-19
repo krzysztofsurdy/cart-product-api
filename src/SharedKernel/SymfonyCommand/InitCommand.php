@@ -23,11 +23,13 @@ class InitCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $migrateCommand = $this->getApplication()->find('doctrine:migrations:migrate');
-        $migrateCommand->run($input, $output);
+        if ($application = $this->getApplication()) {
+            $migrateCommand = $application->find('doctrine:migrations:migrate');
+            $migrateCommand->run($input, $output);
 
-        foreach ($this->provideInitProducts() as $productData) {
-            $this->productService->add(ProductAddRequestDTO::createFromArray($productData));
+            foreach ($this->provideInitProducts() as $productData) {
+                $this->productService->add(ProductAddRequestDTO::createFromArray($productData));
+            }
         }
 
         return 0;

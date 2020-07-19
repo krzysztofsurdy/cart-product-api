@@ -8,7 +8,7 @@ use App\SharedKernel\Event\ProductEvent;
 
 class ProductDeleted extends ProductEvent
 {
-    public static function createFor(string $productId)
+    public static function createFor(string $productId): ProductDeleted
     {
         return new self($productId, []);
     }

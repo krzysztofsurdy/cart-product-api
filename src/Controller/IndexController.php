@@ -17,8 +17,7 @@ class IndexController extends CoreController
      */
     public function indexAction(Connection $mysql, ClientInterface $redis): Response
     {
-        return $this->createApiResponse(
-            true,
+        return self::createSuccessApiResponse(
             null,
             JsonResponse::HTTP_NO_CONTENT
         );

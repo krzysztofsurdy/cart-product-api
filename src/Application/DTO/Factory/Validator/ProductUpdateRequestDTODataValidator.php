@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\DTO\Factory\Validator;
 
+use App\Domain\Product;
 use Webmozart\Assert\Assert;
 
 class ProductUpdateRequestDTODataValidator implements ValidatorInterface
@@ -12,15 +13,15 @@ class ProductUpdateRequestDTODataValidator implements ValidatorInterface
     {
         Assert::notEmpty($data);
 
-        if (isset($data['name'])) {
-            Assert::notNull($data['name']);
-            Assert::string($data['name']);
-            Assert::minLength($data['name'], 1);
+        if (isset($data[Product::LABEL_NAME])) {
+            Assert::notNull($data[Product::LABEL_NAME]);
+            Assert::string($data[Product::LABEL_NAME]);
+            Assert::minLength($data[Product::LABEL_NAME], 1);
         }
 
-        if (isset($data['price'])) {
-            Assert::notNull($data['price']);
-            Assert::greaterThanEq($data['price'], 0);
+        if (isset($data[Product::LABEL_PRICE])) {
+            Assert::notNull($data[Product::LABEL_PRICE]);
+            Assert::greaterThanEq($data[Product::LABEL_PRICE], 0);
         }
     }
 }

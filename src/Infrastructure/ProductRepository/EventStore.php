@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Infrastructure\ProductRepository;
 
 use App\Domain\Product;
-use App\Infrastructure\Exception\ProductNotFound;
+use App\Infrastructure\Exception\InstanceOfInvalidClassAggregatedException;
+use App\Infrastructure\Exception\ProductNotFoundException;
 use App\Infrastructure\ProductRepositoryInterface;
 use Prooph\EventSourcing\Aggregate\AggregateRepository;
 use Prooph\EventSourcing\Aggregate\AggregateType;
@@ -41,7 +42,11 @@ class EventStore extends AggregateRepository implements ProductRepositoryInterfa
         $product = $this->getAggregateRoot($id);
 
         if (!$product) {
-            throw new ProductNotFound($id);
+            throw new ProductNotFoundException($id);
+        }
+
+        if (!$product instanceof Product) {
+            throw new InstanceOfInvalidClassAggregatedException();
         }
 
         return $product;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ProductRepository;
 
 use App\Domain\Product;
-use App\Infrastructure\Exception\ProductNotFound;
+use App\Infrastructure\Exception\ProductNotFoundException;
 use App\Infrastructure\ProductRepositoryInterface;
 
 class InMemory implements ProductRepositoryInterface
@@ -15,7 +15,7 @@ class InMemory implements ProductRepositoryInterface
     public function get(string $id): Product
     {
         if (!isset($this->memory[$id])) {
-            throw new ProductNotFound($id);
+            throw new ProductNotFoundException($id);
         }
 
         return $this->memory[$id];

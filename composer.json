@@ -59,16 +59,18 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@phpstan"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@phpstan"
         ],
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
             "@phpstan-general"
         ],
-        "phpstan-general": "vendor/bin/phpstan analyse -c phpstan.neon src --level 5 --no-progress --memory-limit=0"
+        "phpstan-general": "vendor/bin/phpstan analyse -c phpstan.neon src --level=7 --no-progress --memory-limit=0"
     },
     "conflict": {
         "symfony/symfony": "*"

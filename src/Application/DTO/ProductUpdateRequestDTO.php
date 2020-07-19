@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace App\Application\DTO;
 
 use App\Application\DTO\Factory\ProductUpdateRequestDTOFactory;
+use App\Domain\Product;
 
 class ProductUpdateRequestDTO
 {
     use ProductUpdateRequestDTOFactory;
 
-    private const LABEL_NAME = 'name';
-    private const LABEL_PRICE = 'price';
-
     private string $id;
-    private ?string $name;
-    private ?float $price;
+    private ?string $name = null;
+    private ?float $price = null;
 
     public function getId(): string
     {
@@ -32,11 +30,11 @@ class ProductUpdateRequestDTO
         $output = [];
 
         if ($this->name) {
-            $output[self::LABEL_NAME] = $this->name;
+            $output[Product::LABEL_NAME] = $this->name;
         }
 
         if ($this->price) {
-            $output[self::LABEL_PRICE] = $this->price;
+            $output[Product::LABEL_PRICE] = $this->price;
         }
 
         return $output;

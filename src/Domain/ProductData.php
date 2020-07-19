@@ -10,9 +10,8 @@ class ProductData
 {
     use ProductDataFactory;
 
-    private ?string $name;
-    private ?float $price;
-    private ?Currency $currency;
+    private ?string $name = null;
+    private ?float $price = null;
 
     public function getName(): ?string
     {
@@ -22,10 +21,5 @@ class ProductData
     public function getPrice(): ?float
     {
         return $this->price;
-    }
-
-    public function getCurrency(): ?Currency
-    {
-        return $this->currency;
     }
 }

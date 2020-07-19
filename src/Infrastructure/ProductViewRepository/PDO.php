@@ -18,34 +18,60 @@ class PDO implements ProductViewRepositoryInterface
         $this->connection = $connection;
     }
 
-    public function get(string $id): array
+    public function get(int $page, int $limit): array
     {
-        return $this->connection->fetchAssoc(
-            '
-            SELECT 
-            *
-            FROM product_view pv
-            WHERE pv.id = :id
-        ',
-            [
-                'id' => $id
-            ]
+        $qb = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('product_view', 'pv')
+            ->where('pv.deleted_at IS NULL')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit);
+
+        $result = $this->connection->executeQuery(
+            $qb->getSQL(),
+            $qb->getParameters(),
+            $qb->getParameterTypes()
         );
+
+
+        return $result->fetchAll();
     }
+
+    public function total(): int
+    {
+        $qb = $this->connection->createQueryBuilder()
+            ->select('COUNT(*) as cnt')
+            ->from('product_view', 'pv')
+            ->where('pv.deleted_at IS NULL');
+
+        $result = $this->connection->executeQuery(
+            $qb->getSQL(),
+            $qb->getParameters(),
+            $qb->getParameterTypes()
+        );
+
+
+        return (int)$result->fetchColumn(0);
+    }
+
 
     public function getByName(string $name): ?array
     {
-        return $this->connection->fetchAssoc(
-            '
-            SELECT 
-            *
-            FROM product_view pv
-            WHERE pv.name = :name
-        ',
-            [
+        $qb = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('product_view', 'pv')
+            ->where('pv.name = :name')
+            ->setParameters([
                 'name' => $name
-            ]
+            ]);
+
+        $result = $this->connection->executeQuery(
+            $qb->getSQL(),
+            $qb->getParameters(),
+            $qb->getParameterTypes()
         );
+
+        return $result->fetchAll();
     }
 
     public function add(string $id, ProductData $productData, DateTimeInterface $createdAt): void
@@ -90,7 +116,7 @@ class PDO implements ProductViewRepositoryInterface
     {
         $this->connection->executeUpdate('
             UPDATE product_view
-            SET , price=:price
+            SET price=:price
             WHERE id=:id;
         ', [
             'id'    => $id,

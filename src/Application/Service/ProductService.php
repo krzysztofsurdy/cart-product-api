@@ -7,12 +7,13 @@ namespace App\Application\Service;
 use App\Application\Command\AddProductCommand;
 use App\Application\Command\DeleteProductCommand;
 use App\Application\Command\UpdateProductCommand;
+use App\Application\DTO\Decorator\ProductGetResponseDTODecorator;
 use App\Application\DTO\ProductAddRequestDTO;
 use App\Application\DTO\ProductDeleteRequestDTO;
 use App\Application\DTO\ProductGetRequestDTO;
+use App\Application\DTO\ProductGetResponseDTO;
 use App\Application\DTO\ProductUpdateRequestDTO;
-use App\Application\Query\GetProductQuery;
-use App\Domain\Product;
+use App\Application\Query\GetProductsQuery;
 use App\Domain\ProductData;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
@@ -28,14 +29,23 @@ class ProductService
         $this->productCommandBus = $productCommandBus;
     }
 
-    public function get(ProductGetRequestDTO $requestDTO): Product
+    public function get(ProductGetRequestDTO $requestDTO): ProductGetResponseDTO
     {
-        $envelope = $this->productQueryBus->dispatch(new GetProductQuery($requestDTO->getId()));
+        $envelope = $this->productQueryBus->dispatch(
+            new GetProductsQuery(
+                $requestDTO->getPage(),
+                $requestDTO->getLimit()
+            )
+        );
 
         /** @var HandledStamp $handledStamp */
         $handledStamp = $envelope->last(HandledStamp::class);
 
-        return $handledStamp->getResult();
+        /** @var ProductGetResponseDTO $response */
+        $response = $handledStamp->getResult();
+
+
+        return ProductGetResponseDTODecorator::decorate($response, $requestDTO->getPage(), $requestDTO->getLimit());
     }
 
     public function add(ProductAddRequestDTO $requestDTO): void

@@ -11,10 +11,12 @@ trait FromArrayFactory
 {
     public static function create(object $object, array $data): object
     {
+        $data = self::preparseTypes($data);
+
         foreach ($data as $key => $value) {
             $key = FloorToCamelCase::serialize($key);
 
-            if (empty($value)) {
+            if (empty($value) && !is_array($value)) {
                 $value = null;
             }
 
@@ -26,6 +28,21 @@ trait FromArrayFactory
         }
 
         return $object;
+    }
+
+    private static function preparseTypes(array $data): array
+    {
+        foreach ($data as $key => $value) {
+            $dataTypeKey = sprintf('%s_type', $key);
+
+            if (isset($data[$dataTypeKey])) {
+                settype($value, $data[$dataTypeKey]);
+                unset($data[$dataTypeKey]);
+                $data[$key] = $value;
+            }
+        }
+
+        return $data;
     }
 
     public function serialize(): array

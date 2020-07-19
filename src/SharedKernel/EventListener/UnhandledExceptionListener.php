@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\EventListener;
 
-use App\SharedKernel\Response\BadRequestResponse;
+use App\Controller\CoreController;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -21,6 +21,8 @@ class UnhandledExceptionListener
             $exception = $exception->getPrevious();
         }
 
-        $event->setResponse(new BadRequestResponse($exception));
+        if ($exception) {
+            $event->setResponse(CoreController::createFailApiResponse($exception));
+        }
     }
 }

@@ -17,7 +17,7 @@ class DeleteProductCommandHandler implements MessageHandlerInterface
         $this->products = $products;
     }
 
-    public function __invoke(DeleteProductCommand $command)
+    public function __invoke(DeleteProductCommand $command): void
     {
         $product = $this->products->get($command->getId());
         $product->delete();

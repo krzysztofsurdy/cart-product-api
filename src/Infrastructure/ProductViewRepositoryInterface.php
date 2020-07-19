@@ -8,7 +8,8 @@ use DateTimeInterface;
 
 interface ProductViewRepositoryInterface
 {
-    public function get(string $id): array;
+    public function get(int $page, int $limit): array;
+    public function total(): int;
     public function getByName(string $name): ?array;
     public function add(string $id, ProductData $productData, DateTimeInterface $createdAt): void;
     public function markDeleted(string $id, DateTimeInterface $deletedAt): void;

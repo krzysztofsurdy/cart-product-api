@@ -10,10 +10,19 @@ class ProductGetRequestDTO
 {
     use ProductGetRequestDTOFactory;
 
-    private string $id;
+    public const LABEL_PAGE = 'page';
+    public const LABEL_LIMIT = 'limit';
 
-    public function getId(): string
+    private ?int $page;
+    private ?int $limit;
+
+    public function getPage(): ?int
     {
-        return $this->id;
+        return $this->page;
+    }
+
+    public function getLimit(): ?int
+    {
+        return $this->limit ?? 3;
     }
 }

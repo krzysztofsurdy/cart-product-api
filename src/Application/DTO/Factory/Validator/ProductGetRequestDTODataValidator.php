@@ -11,8 +11,5 @@ class ProductGetRequestDTODataValidator implements ValidatorInterface
     public static function validate(array $data): void
     {
         Assert::notEmpty($data);
-
-        Assert::keyExists($data, 'id');
-        Assert::notNull($data['id']);
     }
 }
