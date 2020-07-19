@@ -3,10 +3,11 @@ Product catalog API
 
 ## Uruchamianie
 Aby uruchomic projekt, nalezy uruchomic komendy w nastepujacej kolejnosci
-    make build
-    make run
-    make composer
-    make init
+    
+    1. make build
+    2. make run
+    3. make composer
+    4. make init
 
 ## Makefile
 MAKEFILE w katalogu / obsługuje następujące polecenia:
