@@ -6,7 +6,7 @@ namespace App\Application\DTO;
 
 use App\Application\DTO\Factory\ProductAddRequestDTOFactory;
 
-class ProductAddRequestDTO
+final class ProductAddRequestDTO
 {
     use ProductAddRequestDTOFactory;
 

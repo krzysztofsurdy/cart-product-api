@@ -9,7 +9,7 @@ use App\SharedKernel\Dictionary\DateFormat;
 use DateTimeInterface;
 use Doctrine\DBAL\Connection;
 
-class PDO implements ProductViewRepositoryInterface
+final class PDO implements ProductViewRepositoryInterface
 {
     private Connection $connection;
 

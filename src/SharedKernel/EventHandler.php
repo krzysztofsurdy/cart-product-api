@@ -10,7 +10,7 @@ use Prooph\ServiceBus\EventBus;
 use Symfony\Component\Messenger\Exception\NoHandlerForMessageException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class EventHandler
+final class EventHandler
 {
     private MessageBusInterface $sharedEventBus;
 

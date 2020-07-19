@@ -7,7 +7,7 @@ namespace App\SharedKernel;
 use Prooph\Common\Event\ActionEvent;
 use Prooph\ServiceBus\EventBus;
 
-class EventRouter extends \Prooph\ServiceBus\Plugin\Router\EventRouter
+final class EventRouter extends \Prooph\ServiceBus\Plugin\Router\EventRouter
 {
     public function onRouteMessage(ActionEvent $actionEvent): void
     {

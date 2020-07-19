@@ -6,7 +6,7 @@ namespace App\Domain\Exception;
 
 use App\SharedKernel\Exception\ApiException;
 
-class FieldNotFoundException extends ApiException
+final class FieldNotFoundException extends ApiException
 {
     public function __construct(string $className, string $fieldName)
     {

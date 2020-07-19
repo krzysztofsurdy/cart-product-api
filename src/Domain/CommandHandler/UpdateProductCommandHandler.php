@@ -10,7 +10,7 @@ use App\Infrastructure\ProductRepositoryInterface;
 use App\Infrastructure\ProductViewRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class UpdateProductCommandHandler implements MessageHandlerInterface
+final class UpdateProductCommandHandler implements MessageHandlerInterface
 {
     private ProductRepositoryInterface $products;
     private ProductViewRepositoryInterface $productsView;

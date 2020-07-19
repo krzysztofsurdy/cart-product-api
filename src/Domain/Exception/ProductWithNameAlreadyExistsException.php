@@ -5,7 +5,7 @@ namespace App\Domain\Exception;
 
 use App\SharedKernel\Exception\ApiException;
 
-class ProductWithNameAlreadyExistsException extends ApiException
+final class ProductWithNameAlreadyExistsException extends ApiException
 {
     public function __construct(string $name)
     {

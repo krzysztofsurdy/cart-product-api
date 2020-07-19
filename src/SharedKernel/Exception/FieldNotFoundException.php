@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Exception;
 
-class FieldNotFoundException extends ApiException
+final class FieldNotFoundException extends ApiException
 {
     public function __construct(string $className, string $fieldName)
     {

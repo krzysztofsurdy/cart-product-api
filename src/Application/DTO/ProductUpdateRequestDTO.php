@@ -7,7 +7,7 @@ namespace App\Application\DTO;
 use App\Application\DTO\Factory\ProductUpdateRequestDTOFactory;
 use App\Domain\Product;
 
-class ProductUpdateRequestDTO
+final class ProductUpdateRequestDTO
 {
     use ProductUpdateRequestDTOFactory;
 
@@ -23,6 +23,11 @@ class ProductUpdateRequestDTO
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
     }
 
     public function serialize(): array

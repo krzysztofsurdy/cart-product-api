@@ -5,7 +5,7 @@ namespace App\Infrastructure\Exception;
 
 use App\SharedKernel\Exception\ApiException;
 
-class InstanceOfInvalidClassAggregatedException extends ApiException
+final class InstanceOfInvalidClassAggregatedException extends ApiException
 {
     public function __construct()
     {

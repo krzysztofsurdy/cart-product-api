@@ -7,7 +7,7 @@ use App\Domain\Event\ProductCreated;
 use App\Infrastructure\ProductViewRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 
-class ProductCreatedSubscriber implements MessageSubscriberInterface
+final class ProductCreatedSubscriber implements MessageSubscriberInterface
 {
     private ProductViewRepositoryInterface $productViewRepository;
 

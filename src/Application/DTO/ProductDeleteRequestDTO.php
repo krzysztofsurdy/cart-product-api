@@ -6,7 +6,7 @@ namespace App\Application\DTO;
 
 use App\Application\DTO\Factory\ProductDeleteRequestDTOFactory;
 
-class ProductDeleteRequestDTO
+final class ProductDeleteRequestDTO
 {
     use ProductDeleteRequestDTOFactory;
 

@@ -8,7 +8,7 @@ use App\Application\Command\DeleteProductCommand;
 use App\Infrastructure\ProductRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class DeleteProductCommandHandler implements MessageHandlerInterface
+final class DeleteProductCommandHandler implements MessageHandlerInterface
 {
     private ProductRepositoryInterface $products;
 

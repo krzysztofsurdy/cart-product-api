@@ -28,6 +28,7 @@
         <whitelist>
             <directory>src</directory>
             <exclude>
+                <directory suffix=".php">src/Application/Service</directory>
                 <directory suffix=".php">src/SharedKernel</directory>
             </exclude>
         </whitelist>

@@ -9,7 +9,7 @@ use App\Application\Query\GetProductsQuery;
 use App\Infrastructure\ProductViewRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class GetProductsQueryHandler implements MessageHandlerInterface
+final class GetProductsQueryHandler implements MessageHandlerInterface
 {
     private ProductViewRepositoryInterface $productsView;
 

@@ -11,7 +11,7 @@ use Prooph\EventStoreBusBridge\EventPublisher;
 use Prooph\ServiceBus\EventBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class EventStore
+final class EventStore
 {
     private ProophEventStore $proophEventStore;
     private ActionEventEmitter $actionEventEmitter;

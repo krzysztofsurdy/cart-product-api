@@ -7,7 +7,7 @@ use App\Domain\Event\ProductNameChanged;
 use App\Infrastructure\ProductViewRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 
-class ProductNameChangedSubscriber implements MessageSubscriberInterface
+final class ProductNameChangedSubscriber implements MessageSubscriberInterface
 {
     private ProductViewRepositoryInterface $productViewRepository;
 

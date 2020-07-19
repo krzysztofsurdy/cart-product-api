@@ -6,7 +6,7 @@ namespace App\Application\DTO\Decorator;
 use App\Application\DTO\ProductGetResponseDTO;
 use App\Domain\Product;
 
-class ProductGetResponseDTODecorator
+final class ProductGetResponseDTODecorator
 {
     public static function decorate(ProductGetResponseDTO $dto, int $page, int $limit): ProductGetResponseDTO
     {

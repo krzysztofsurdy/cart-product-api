@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\DataDeserializer;
 
-class FloorToCamelCase
+final class FloorToCamelCase
 {
     public static function serialize(string $string): string
     {

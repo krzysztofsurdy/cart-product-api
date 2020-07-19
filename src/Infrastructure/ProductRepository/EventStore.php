@@ -15,7 +15,7 @@ use Prooph\EventStore\EventStore as ProophEventStore;
 use Prooph\EventStore\Stream;
 use Prooph\EventStore\StreamName;
 
-class EventStore extends AggregateRepository implements ProductRepositoryInterface
+final class EventStore extends AggregateRepository implements ProductRepositoryInterface
 {
     public function __construct(
         ProophEventStore $productEventStore,

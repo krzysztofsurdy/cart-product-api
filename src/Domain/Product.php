@@ -16,7 +16,7 @@ use JsonSerializable;
 use Prooph\EventSourcing\AggregateRoot;
 use Ramsey\Uuid\Uuid;
 
-class Product extends AggregateRoot implements ComparableInterface, JsonSerializable
+final class Product extends AggregateRoot implements ComparableInterface, JsonSerializable
 {
     use AggregateRootApply;
 

@@ -6,7 +6,7 @@ namespace App\Domain\Event;
 
 use App\SharedKernel\Event\ProductEvent;
 
-class ProductDeleted extends ProductEvent
+final class ProductDeleted extends ProductEvent
 {
     public static function createFor(string $productId): ProductDeleted
     {

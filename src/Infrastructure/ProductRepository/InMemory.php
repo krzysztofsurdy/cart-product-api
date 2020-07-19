@@ -8,7 +8,7 @@ use App\Domain\Product;
 use App\Infrastructure\Exception\ProductNotFoundException;
 use App\Infrastructure\ProductRepositoryInterface;
 
-class InMemory implements ProductRepositoryInterface
+final class InMemory implements ProductRepositoryInterface
 {
     private array $memory = [];
 

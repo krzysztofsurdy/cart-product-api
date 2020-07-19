@@ -6,7 +6,7 @@ namespace App\Infrastructure\Exception;
 
 use App\SharedKernel\Exception\ApiException;
 
-class ProductNotFoundException extends ApiException
+final class ProductNotFoundException extends ApiException
 {
     public function __construct(string $id)
     {

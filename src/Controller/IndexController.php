@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class IndexController extends CoreController
+final class IndexController extends CoreController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")

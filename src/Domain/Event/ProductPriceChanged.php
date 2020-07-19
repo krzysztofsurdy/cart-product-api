@@ -6,7 +6,7 @@ namespace App\Domain\Event;
 
 use App\SharedKernel\Event\ProductEvent;
 
-class ProductPriceChanged extends ProductEvent
+final class ProductPriceChanged extends ProductEvent
 {
     private const LABEL_PRICE = 'price';
 

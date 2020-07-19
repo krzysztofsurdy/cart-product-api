@@ -18,7 +18,7 @@ use App\Domain\ProductData;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-class ProductService
+final class ProductService
 {
     private MessageBusInterface $productQueryBus;
     private MessageBusInterface $productCommandBus;

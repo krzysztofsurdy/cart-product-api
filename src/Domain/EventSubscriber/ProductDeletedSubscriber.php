@@ -7,7 +7,7 @@ use App\Domain\Event\ProductDeleted;
 use App\Infrastructure\ProductViewRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 
-class ProductDeletedSubscriber implements MessageSubscriberInterface
+final class ProductDeletedSubscriber implements MessageSubscriberInterface
 {
     private ProductViewRepositoryInterface $productViewRepository;
 

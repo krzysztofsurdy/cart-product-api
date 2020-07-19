@@ -8,7 +8,7 @@ use App\Domain\ComparerInterface;
 use App\Domain\Product;
 use App\Domain\ProductData;
 
-class ProductComparer implements ComparerInterface
+final class ProductComparer implements ComparerInterface
 {
     private Product $product;
 

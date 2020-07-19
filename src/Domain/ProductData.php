@@ -6,7 +6,7 @@ namespace App\Domain;
 
 use App\Domain\Factory\ProductDataFactory;
 
-class ProductData
+final class ProductData
 {
     use ProductDataFactory;
 

@@ -11,7 +11,7 @@ use App\Infrastructure\ProductViewRepositoryInterface;
 use App\SharedKernel\Dictionary\DateFormat;
 use DateTimeInterface;
 
-class InMemory implements ProductViewRepositoryInterface
+final class InMemory implements ProductViewRepositoryInterface
 {
     private array $memory = [];
 

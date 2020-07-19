@@ -6,7 +6,7 @@ namespace App\Application\DTO;
 
 use App\Application\DTO\Factory\ProductGetRequestDTOFactory;
 
-class ProductGetRequestDTO
+final class ProductGetRequestDTO
 {
     use ProductGetRequestDTOFactory;
 
@@ -23,6 +23,6 @@ class ProductGetRequestDTO
 
     public function getLimit(): ?int
     {
-        return $this->limit ?? 3;
+        return $this->limit;
     }
 }

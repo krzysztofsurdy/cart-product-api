@@ -12,7 +12,7 @@ use App\Infrastructure\ProductRepositoryInterface;
 use App\Infrastructure\ProductViewRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class AddProductCommandHandler implements MessageHandlerInterface
+final class AddProductCommandHandler implements MessageHandlerInterface
 {
     private const LABEL_NAME = 'name';
 

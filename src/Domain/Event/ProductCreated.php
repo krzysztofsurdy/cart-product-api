@@ -7,7 +7,7 @@ namespace App\Domain\Event;
 use App\Domain\ProductData;
 use App\SharedKernel\Event\ProductEvent;
 
-class ProductCreated extends ProductEvent
+final class ProductCreated extends ProductEvent
 {
     private const LABEL_PRODUCT_DATA = 'product_data';
 

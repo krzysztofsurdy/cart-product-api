@@ -5,7 +5,7 @@ namespace App\Application\DTO;
 
 use App\Application\DTO\Factory\ProductGetResponseDTOFactory;
 
-class ProductGetResponseDTO
+final class ProductGetResponseDTO
 {
     use ProductGetResponseDTOFactory;
 
