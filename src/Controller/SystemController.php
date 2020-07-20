@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route(path="/system")
  */
-class SystemController extends CoreController
+final class SystemController extends CoreController
 {
     /**
      * @Route(path="/healthcheck", methods={"GET"})

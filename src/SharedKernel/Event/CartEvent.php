@@ -5,5 +5,4 @@ namespace App\SharedKernel\Event;
 
 abstract class CartEvent extends EventStoreEvent
 {
-
 }

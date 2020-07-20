@@ -33,6 +33,7 @@ final class AddProductCommandHandler implements MessageHandlerInterface
         }
 
         $product = Product::create(ProductData::createFromArray([
+            Product::LABEL_ID => $command->getId(),
             Product::LABEL_NAME => $command->getName(),
             Product::LABEL_PRICE => $command->getPrice()
         ]));

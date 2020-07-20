@@ -6,13 +6,20 @@ namespace App\Product\Application\Command;
 
 final class AddProductCommand
 {
+    private string $id;
     private string $name;
     private float $price;
 
-    public function __construct(string $name, float $price)
+    public function __construct(string $id, string $name, float $price)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->price = $price;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getName(): string

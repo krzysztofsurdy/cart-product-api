@@ -7,5 +7,4 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class CreateCartCommandHandler implements MessageHandlerInterface
 {
-
 }

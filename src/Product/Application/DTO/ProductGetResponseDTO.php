@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Product\ProductApplication\DTO;
+namespace App\Product\Application\DTO;
 
 use App\Product\Application\DTO\Factory\ProductGetResponseDTOFactory;
 

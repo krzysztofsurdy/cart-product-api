@@ -15,7 +15,6 @@ use App\SharedKernel\Dictionary\DateFormat;
 use DateTimeInterface;
 use JsonSerializable;
 use Prooph\EventSourcing\AggregateRoot;
-use Ramsey\Uuid\Uuid;
 
 final class Product extends AggregateRoot implements ComparableInterface, JsonSerializable
 {
@@ -51,8 +50,7 @@ final class Product extends AggregateRoot implements ComparableInterface, JsonSe
     public static function create(ProductData $productData): Product
     {
         $product = new self();
-        $id = (Uuid::uuid1())->toString();
-        $product->recordThat(ProductCreated::createFor($id, $productData));
+        $product->recordThat(ProductCreated::createFor($productData->getId(), $productData));
 
         return $product;
     }

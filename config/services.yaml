@@ -12,6 +12,8 @@ services:
             $productEventStreamName: '%product.event_stream.name%'
             $productEventStore: '@app.shared_kernel.action_event_emitter_event_store'
             $productSnapshotStore: '@app.snapshot_store.offer'
+            $cartCommandBus: '@messenger.bus.command.cart'
+            $cartQueryBus: '@messenger.bus.query.cart'
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Tests,Kernel.php}'

@@ -13,8 +13,11 @@ use App\Product\Application\DTO\ProductDeleteRequestDTO;
 use App\Product\Application\DTO\ProductGetRequestDTO;
 use App\Product\Application\DTO\ProductGetResponseDTO;
 use App\Product\Application\DTO\ProductUpdateRequestDTO;
+use App\Product\Application\Query\GetProductQuery;
 use App\Product\Application\Query\GetProductsQuery;
+use App\Product\Domain\Product;
 use App\Product\Domain\ProductData;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
@@ -27,6 +30,16 @@ final class ProductService
     {
         $this->productQueryBus = $productQueryBus;
         $this->productCommandBus = $productCommandBus;
+    }
+
+    public function specific(string $id): Product
+    {
+        $envelope = $this->productQueryBus->dispatch(new GetProductQuery($id));
+
+        /** @var HandledStamp $handledStamp */
+        $handledStamp = $envelope->last(HandledStamp::class);
+
+        return $handledStamp->getResult();
     }
 
     public function get(ProductGetRequestDTO $requestDTO): ProductGetResponseDTO
@@ -48,9 +61,12 @@ final class ProductService
         return ProductGetResponseDTODecorator::decorate($response, $requestDTO->getPage(), $requestDTO->getLimit());
     }
 
-    public function add(ProductAddRequestDTO $requestDTO): void
+    public function add(ProductAddRequestDTO $requestDTO): string
     {
-        $this->productCommandBus->dispatch(new AddProductCommand($requestDTO->getName(), $requestDTO->getPrice()));
+        $id = Uuid::uuid1()->toString();
+        $this->productCommandBus->dispatch(new AddProductCommand($id, $requestDTO->getName(), $requestDTO->getPrice()));
+
+        return $id;
     }
 
     public function delete(ProductDeleteRequestDTO $requestDTO): void

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Cart\Command;
+namespace App\Product\Application\Query;
 
-class CreateCartCommand
+final class GetProductQuery
 {
     private string $id;
 

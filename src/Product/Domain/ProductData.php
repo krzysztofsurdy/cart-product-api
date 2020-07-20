@@ -11,8 +11,14 @@ final class ProductData implements AggregateRootDataInterface
 {
     use ProductDataFactory;
 
+    private ?string $id = null;
     private ?string $name = null;
     private ?float $price = null;
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
 
     public function getName(): ?string
     {
