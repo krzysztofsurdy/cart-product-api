@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Product\Domain\Compare;
 
-use App\Product\Domain\ComparerInterface;
 use App\Product\Domain\Product;
 use App\Product\Domain\ProductData;
+use App\SharedKernel\Aggregate\AggregateRootDataInterface;
+use App\SharedKernel\Compare\ComparerInterface;
 
 final class ProductComparer implements ComparerInterface
 {
@@ -17,14 +18,17 @@ final class ProductComparer implements ComparerInterface
         $this->product = $product;
     }
 
-    public function compare(ProductData $productData): void
+    /**
+     * @param ProductData $aggregateRootData
+     */
+    public function compare(AggregateRootDataInterface $aggregateRootData): void
     {
-        if ($productData->getName() && $this->product->getName() !== $productData->getName()) {
-            $this->product->changeName($productData->getName());
+        if ($aggregateRootData->getName() && $this->product->getName() !== $aggregateRootData->getName()) {
+            $this->product->changeName($aggregateRootData->getName());
         }
 
-        if ($productData->getPrice() && $this->product->getPrice() !== $productData->getPrice()) {
-            $this->product->changePrice($productData->getPrice());
+        if ($aggregateRootData->getPrice() && $this->product->getPrice() !== $aggregateRootData->getPrice()) {
+            $this->product->changePrice($aggregateRootData->getPrice());
         }
     }
 }
