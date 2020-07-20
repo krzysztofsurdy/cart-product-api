@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Doctrine\DBAL\Connection;
-use Predis\ClientInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +13,7 @@ final class IndexController extends CoreController
     /**
      * @Route("/", methods={"GET"}, name="index")
      */
-    public function indexAction(Connection $mysql, ClientInterface $redis): Response
+    public function indexAction(): Response
     {
         return self::createSuccessApiResponse(
             null,

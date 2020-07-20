@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Application\DTO\ProductAddRequestDTO;
-use App\Application\DTO\ProductDeleteRequestDTO;
-use App\Application\DTO\ProductGetRequestDTO;
-use App\Application\DTO\ProductUpdateRequestDTO;
-use App\Application\Service\ProductService;
+use App\Product\Application\DTO\ProductAddRequestDTO;
+use App\Product\Application\DTO\ProductDeleteRequestDTO;
+use App\Product\Application\DTO\ProductGetRequestDTO;
+use App\Product\Application\DTO\ProductUpdateRequestDTO;
+use App\Product\Application\Service\ProductService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(path="/v1/product")
+ */
 final class ProductController extends CoreController
 {
     private ProductService $productService;
@@ -24,7 +27,7 @@ final class ProductController extends CoreController
     }
 
     /**
-     * @Route("/api/product", methods={"GET"}, name="products_get")
+     * @Route("/", methods={"GET"}, name="products_get")
      */
     public function getProductsAction(Request $request): Response
     {
@@ -42,7 +45,7 @@ final class ProductController extends CoreController
     }
 
     /**
-     * @Route("/api/product", methods={"POST"}, name="product_add")
+     * @Route("/", methods={"POST"}, name="product_add")
      */
     public function addProductAction(Request $request): Response
     {
@@ -64,7 +67,7 @@ final class ProductController extends CoreController
     }
 
     /**
-     * @Route("/api/product/{id}", methods={"DELETE"}, name="product_get")
+     * @Route("/{id}", methods={"DELETE"}, name="product_get")
      */
     public function deleteProductAction(string $id): Response
     {
@@ -82,7 +85,7 @@ final class ProductController extends CoreController
     }
 
     /**
-     * @Route("/api/product", methods={"PUT"}, name="product_update")
+     * @Route("/", methods={"PUT"}, name="product_update")
      */
     public function updateProductAction(Request $request): Response
     {
