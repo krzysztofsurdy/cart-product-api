@@ -37,7 +37,6 @@ services:
     volumes:
       - ./:/product-catalog-api
       - ./:/product-catalog-api/vendor:cached
-      - ./docker/logs:/var/log
       - ./docker/nginx/conf:/etc/nginx/conf.d
       - ./docker/nginx/ssl/:/etc/nginx/ssl/
     depends_on:

@@ -19,15 +19,14 @@ trait ProductGetRequestDTOFactory
 
         $dto = new ProductGetRequestDTO();
 
-        // TODO FIGURE OUT ENV PASSING ISSUE
         if (!isset($data[ProductGetRequestDTO::LABEL_PAGE])) {
-            $dto->{ProductGetRequestDTO::LABEL_PAGE} = 1; // TODO HERE
+            $dto->{ProductGetRequestDTO::LABEL_PAGE} = (int)getenv('API_DEFAULT_FIRST_PAGE');
         } else {
             $data = DTODataTypeDecorator::decorate($data, ProductGetRequestDTO::LABEL_PAGE, 'int');
         }
 
         if (!isset($data[ProductGetRequestDTO::LABEL_LIMIT])) {
-            $dto->{ProductGetRequestDTO::LABEL_LIMIT} = 3; // TODO HERE
+            $dto->{ProductGetRequestDTO::LABEL_LIMIT} = (int)getenv('API_ITEMS_LIMIT');
         } else {
             $data = DTODataTypeDecorator::decorate($data, ProductGetRequestDTO::LABEL_LIMIT, 'int');
         }

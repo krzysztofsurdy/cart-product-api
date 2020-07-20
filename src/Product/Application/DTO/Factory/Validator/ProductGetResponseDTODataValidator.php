@@ -13,8 +13,5 @@ class ProductGetResponseDTODataValidator implements ValidatorInterface
     {
         Assert::isArray($data[ProductGetResponseDTO::LABEL_ITEMS]);
         Assert::integer($data[ProductGetResponseDTO::LABEL_ITEMS_TOTAL]);
-        Assert::integer($data[ProductGetResponseDTO::LABEL_PAGE]);
-        Assert::integer($data[ProductGetResponseDTO::LABEL_PAGES]);
-        Assert::integer($data[ProductGetResponseDTO::LABEL_LIMIT]);
     }
 }

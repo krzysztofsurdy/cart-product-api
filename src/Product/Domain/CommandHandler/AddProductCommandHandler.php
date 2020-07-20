@@ -25,7 +25,6 @@ final class AddProductCommandHandler implements MessageHandlerInterface
         $this->productsView = $productsView;
     }
 
-
     public function __invoke(AddProductCommand $command): void
     {
         if ($this->productsView->getByName($command->getName())) {

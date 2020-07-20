@@ -103,17 +103,17 @@ final class Product extends AggregateRoot implements ComparableInterface, JsonSe
         return $this->price;
     }
 
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getDeletedAt(): \DateTimeInterface
+    public function getDeletedAt(): ?DateTimeInterface
     {
         return $this->deletedAt;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             self::LABEL_ID => $this->id,
@@ -138,11 +138,11 @@ final class Product extends AggregateRoot implements ComparableInterface, JsonSe
         $productData = $event->getProductData();
         $this->id = $event->aggregateId();
         if ($productData->getName()) {
-            $this->name = $productData->getName();
+            $this->name = (string)$productData->getName();
         }
 
         if ($productData->getPrice()) {
-            $this->price = $productData->getPrice();
+            $this->price = (float)$productData->getPrice();
         }
 
         $this->createdAt = $event->createdAt();

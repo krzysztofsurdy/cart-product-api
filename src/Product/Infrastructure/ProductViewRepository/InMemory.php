@@ -34,7 +34,7 @@ final class InMemory implements ProductViewRepositoryInterface
             }
         }
 
-        throw new ProductNotFoundException($name);
+        return [];
     }
 
     public function add(string $id, ProductData $productData, DateTimeInterface $createdAt): void

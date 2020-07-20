@@ -24,7 +24,8 @@ final class GetProductsQueryHandler implements MessageHandlerInterface
 
         return ProductGetResponseDTO::createFromArray([
            ProductGetResponseDTO::LABEL_ITEMS => $products,
-           ProductGetResponseDTO::LABEL_ITEMS_TOTAL => $this->productsView->total()
+           ProductGetResponseDTO::LABEL_ITEMS_TOTAL => $this->productsView->total(),
+           ProductGetResponseDTO::LABEL_PAGE => $query->getPage()
         ]);
     }
 }
