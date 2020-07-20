@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\SymfonyCommand;
 
-use App\Application\DTO\ProductAddRequestDTO;
-use App\Application\Service\ProductService;
+use App\Product\Application\DTO\ProductAddRequestDTO;
+use App\Product\Application\Service\ProductService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

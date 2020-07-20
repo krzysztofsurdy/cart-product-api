@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Product\Application\DTO\Factory\Validator;
 
 use App\Product\Domain\Product;
+use App\SharedKernel\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
 class ProductAddRequestDTOPDataValidator implements ValidatorInterface

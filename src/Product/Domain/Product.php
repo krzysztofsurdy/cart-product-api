@@ -11,6 +11,7 @@ use App\Product\Domain\Event\ProductNameChanged;
 use App\Product\Domain\Event\ProductPriceChanged;
 use App\SharedKernel\Aggregate\AggregateRootApply;
 use App\SharedKernel\Compare\ComparableInterface;
+use App\SharedKernel\Compare\ComparerInterface;
 use App\SharedKernel\Dictionary\DateFormat;
 use DateTimeInterface;
 use JsonSerializable;
@@ -41,6 +42,7 @@ final class Product extends AggregateRoot implements ComparableInterface, JsonSe
     {
         return new ProductComparer($this);
     }
+
 
     public function setId(string $id): void
     {
@@ -120,6 +122,15 @@ final class Product extends AggregateRoot implements ComparableInterface, JsonSe
             self::LABEL_CREATED_AT => $this->createdAt->format(DateFormat::DEFAULT),
             self::LABEL_DELETED_AT => $this->deletedAt ? $this->deletedAt->format(DateFormat::DEFAULT) : null,
         ];
+    }
+
+    public function getProductData(): ProductData
+    {
+        return ProductData::createFromArray([
+            self::LABEL_ID => $this->id,
+            self::LABEL_NAME => $this->name,
+            self::LABEL_PRICE => $this->price,
+        ]);
     }
 
     protected function onProductCreated(ProductCreated $event): void

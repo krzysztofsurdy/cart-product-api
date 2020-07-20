@@ -29,8 +29,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
-    App\Infrastructure\ProductRepositoryInterface:
-        class: App\Infrastructure\ProductRepository\EventStore
+    App\Product\Infrastructure\ProductRepositoryInterface:
+        class: App\Product\Infrastructure\ProductRepository\EventStore
 
-    App\Infrastructure\ProductViewRepositoryInterface:
-        class: App\Infrastructure\ProductViewRepository\PDO
+    App\Product\Infrastructure\ProductViewRepositoryInterface:
+        class: App\Product\Infrastructure\ProductViewRepository\PDO

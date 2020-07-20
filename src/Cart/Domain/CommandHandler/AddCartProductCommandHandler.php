@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace App\Cart\Domain\CommandHandler;
 
-use App\Cart\Command\CreateCartCommand;
-use App\Cart\Domain\Cart;
+use App\Cart\Application\Command\AddCartProductCommand;
 use App\Cart\Infrastructure\CartRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class CreateCartCommandHandler implements MessageHandlerInterface
+class AddCartProductCommandHandler implements MessageHandlerInterface
 {
     private CartRepositoryInterface $cartRepository;
 
@@ -17,8 +16,8 @@ class CreateCartCommandHandler implements MessageHandlerInterface
         $this->cartRepository = $cartRepository;
     }
 
-    public function __invoke(CreateCartCommand $command): void
+    public function __invoke(AddCartProductCommand $command)
     {
-        $this->cartRepository->create(Cart::create($command->getId()));
+        // TODO: Implement __invoke() method.
     }
 }
