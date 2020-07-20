@@ -19,6 +19,6 @@ class CreateCartCommandHandler implements MessageHandlerInterface
 
     public function __invoke(CreateCartCommand $command): void
     {
-        $this->cartRepository->create(Cart::create($command->getId()));
+        $this->cartRepository->save(Cart::build($command->getId()));
     }
 }

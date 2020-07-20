@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace App\Cart\Domain;
 
+use App\Cart\Domain\Factory\CartProductFactory;
 use App\Product\Domain\ProductData;
 use JsonSerializable;
 
 class CartProduct implements JsonSerializable
 {
+    use CartProductFactory;
+
     public const LABEL_PRODUCT = 'product';
     public const LABEL_QUANTITY = 'quantity';
 
@@ -24,10 +27,15 @@ class CartProduct implements JsonSerializable
         return $this->quantity;
     }
 
+    public function incrementQuantity(): void
+    {
+        $this->quantity++;
+    }
+
     public function jsonSerialize()
     {
         return [
-            self::LABEL_PRODUCT => $this->product->jsonSerialize(),
+            self::LABEL_PRODUCT  => $this->product->serialize(),
             self::LABEL_QUANTITY => $this->quantity
         ];
     }

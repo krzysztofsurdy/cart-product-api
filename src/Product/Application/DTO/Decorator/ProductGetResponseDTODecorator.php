@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Product\Application\DTO\Decorator;
 
 use App\Product\Application\DTO\ProductGetResponseDTO;
-use App\Product\Domain\Product;
 
 final class ProductGetResponseDTODecorator
 {

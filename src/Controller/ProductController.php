@@ -27,7 +27,7 @@ final class ProductController extends CoreController
     }
 
     /**
-     * @Route("/", methods={"GET"}, name="products_get")
+     * @Route("", methods={"GET"}, name="products_get")
      */
     public function getProductsAction(Request $request): Response
     {
@@ -45,7 +45,7 @@ final class ProductController extends CoreController
     }
 
     /**
-     * @Route("/", methods={"POST"}, name="product_add")
+     * @Route("", methods={"POST"}, name="product_add")
      */
     public function addProductAction(Request $request): Response
     {
@@ -85,7 +85,7 @@ final class ProductController extends CoreController
     }
 
     /**
-     * @Route("/", methods={"PUT"}, name="product_update")
+     * @Route("", methods={"PUT"}, name="product_update")
      */
     public function updateProductAction(Request $request): Response
     {

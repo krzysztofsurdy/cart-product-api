@@ -23,7 +23,7 @@
         "symfony/framework-bundle": "5.1.*",
         "symfony/messenger": "5.1.*",
         "symfony/yaml": "5.1.*",
-        "webmozart/assert": "^1.9",
+        "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "symfony/debug-bundle": "5.1.*"

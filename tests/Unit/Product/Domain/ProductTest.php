@@ -59,7 +59,7 @@ class ProductTest extends TestCase
         $this->assertEquals(33.33, $serialized[Product::LABEL_PRICE]);
         $this->assertNotEmpty($serialized[Product::LABEL_ID]);
         $this->assertNotEmpty($serialized[Product::LABEL_CREATED_AT]);
-        $this->assertNotEmpty( $serialized[Product::LABEL_DELETED_AT]);
+        $this->assertNotEmpty($serialized[Product::LABEL_DELETED_AT]);
     }
 
     private function createProduct(string $name, float $price): Product

@@ -11,13 +11,24 @@ class Redis implements CartRepositoryInterface
 {
     private ClientInterface $redis;
 
-    public function create(Cart $cart): void
+    public function __construct(ClientInterface $redis)
     {
-        $this->redis->set($cart->getId(), $cart->jsonSerialize());
+        $this->redis = $redis;
+    }
+
+    public function save(Cart $cart): void
+    {
+        $this->redis->set($cart->getId(), json_encode($cart->jsonSerialize()));
     }
 
     public function get(string $id): array
     {
-        return [];
+        $serialized = $this->redis->get($id);
+
+        if (!is_string($serialized)) {
+            return [];
+        }
+
+        return json_decode($serialized, true);
     }
 }

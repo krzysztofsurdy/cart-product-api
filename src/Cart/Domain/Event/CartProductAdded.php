@@ -8,7 +8,7 @@ use App\SharedKernel\Event\CartEvent;
 
 class CartProductAdded extends CartEvent
 {
-    public static function createFor(string $cartId, ProductData $productData): CartCreated
+    public static function createFor(string $cartId, ProductData $productData): CartProductAdded
     {
         return new self($cartId, [
             'product_data' => $productData->serialize()
@@ -17,6 +17,6 @@ class CartProductAdded extends CartEvent
 
     public function getProductData(): ProductData
     {
-        return ProductData::create($this->payload['product_data']);
+        return ProductData::createFromArray($this->payload['product_data']);
     }
 }

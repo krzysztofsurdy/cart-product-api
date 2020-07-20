@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 namespace App\Cart\Application\Command;
 
-use App\Product\Domain\Product;
+use App\Product\Domain\ProductData;
 
 class AddCartProductCommand
 {
     private string $cartId;
-    private Product $product;
+    private ProductData $productData;
 
-    public function __construct(string $cartId, Product $product)
+    public function __construct(string $cartId, ProductData $productData)
     {
         $this->cartId = $cartId;
-        $this->product = $product;
+        $this->productData = $productData;
     }
 
     public function getCartId(): string
@@ -21,8 +21,8 @@ class AddCartProductCommand
         return $this->cartId;
     }
 
-    public function getProduct(): Product
+    public function getProductData(): ProductData
     {
-        return $this->product;
+        return $this->productData;
     }
 }

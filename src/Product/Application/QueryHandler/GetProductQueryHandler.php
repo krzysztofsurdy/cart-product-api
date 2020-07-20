@@ -5,10 +5,10 @@ namespace App\Product\Application\QueryHandler;
 
 use App\Product\Application\Query\GetProductQuery;
 use App\Product\Domain\Product;
-use App\Product\Infrastructure\Exception\ProductNotFoundException;
 use App\Product\Infrastructure\ProductRepositoryInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class GetProductQueryHandler
+class GetProductQueryHandler implements MessageHandlerInterface
 {
     private ProductRepositoryInterface $productRepository;
 
@@ -19,12 +19,6 @@ class GetProductQueryHandler
 
     public function __invoke(GetProductQuery $query): Product
     {
-        $product = $this->productRepository->get($query->getId());
-
-        if ($product) {
-            return $product;
-        }
-
-        throw new ProductNotFoundException($query->getId());
+        return $this->productRepository->get($query->getId());
     }
 }

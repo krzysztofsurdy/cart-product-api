@@ -34,3 +34,6 @@ services:
 
     App\Product\Infrastructure\ProductViewRepositoryInterface:
         class: App\Product\Infrastructure\ProductViewRepository\PDO
+
+    App\Cart\Infrastructure\CartRepositoryInterface:
+        class: App\Cart\Infrastructure\CartRepository\Redis

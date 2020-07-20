@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Factory;
 
-use App\Domain\Exception\FieldNotFoundException;
 use App\SharedKernel\DataDeserializer\FloorToCamelCase;
+use App\SharedKernel\Exception\FieldNotFoundException;
 
 trait FromArrayFactory
 {
@@ -16,11 +16,7 @@ trait FromArrayFactory
         foreach ($data as $key => $value) {
             $key = FloorToCamelCase::serialize($key);
 
-            if (empty($value) && !is_array($value)) {
-                $value = null;
-            }
-
-            if (!property_exists(self::class, $key)) {
+            if (!property_exists($object, $key)) {
                 throw new FieldNotFoundException(self::class, $key);
             }
 

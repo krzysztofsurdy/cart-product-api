@@ -6,8 +6,10 @@ namespace App\Cart\Application\Service;
 use App\Cart\Application\Command\AddCartProductCommand;
 use App\Cart\Application\DTO\AddCartProductRequestDTO;
 use App\Cart\Application\DTO\CartCreateResponseDTO;
+use App\Cart\Application\DTO\DeleteCartProductRequestDTO;
 use App\Cart\Application\Query\GetCartQuery;
 use App\Cart\Command\CreateCartCommand;
+use App\Cart\Command\DeleteCartProductCommand;
 use App\Cart\Domain\Cart;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -17,6 +19,13 @@ class CartService
 {
     private MessageBusInterface $cartQueryBus;
     private MessageBusInterface $cartCommandBus;
+
+    public function __construct(MessageBusInterface $cartQueryBus, MessageBusInterface $cartCommandBus)
+    {
+        $this->cartQueryBus = $cartQueryBus;
+        $this->cartCommandBus = $cartCommandBus;
+    }
+
 
     public function create(): CartCreateResponseDTO
     {
@@ -41,6 +50,11 @@ class CartService
 
     public function addProduct(AddCartProductRequestDTO $requestDTO): void
     {
-        $this->cartCommandBus->dispatch(new AddCartProductCommand($requestDTO->getCartId(), $requestDTO->getProduct()));
+        $this->cartCommandBus->dispatch(new AddCartProductCommand($requestDTO->getCartId(), $requestDTO->getProductData()));
+    }
+
+    public function deleteProduct(DeleteCartProductRequestDTO $requestDTO): void
+    {
+        $this->cartCommandBus->dispatch(new DeleteCartProductCommand($requestDTO->getCartId(), $requestDTO->getProductId()));
     }
 }

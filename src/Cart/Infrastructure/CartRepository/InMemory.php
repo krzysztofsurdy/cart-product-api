@@ -3,6 +3,24 @@ declare(strict_types=1);
 
 namespace App\Cart\Infrastructure\CartRepository;
 
-class InMemory
+use App\Cart\Domain\Cart;
+use App\Cart\Infrastructure\CartRepositoryInterface;
+
+class InMemory implements CartRepositoryInterface
 {
+    private array $memory = [];
+
+    public function save(Cart $cart): void
+    {
+        $this->memory[$cart->getId()] = $cart->jsonSerialize();
+    }
+
+    public function get(string $id): array
+    {
+        if (!isset($this->memory[$id])) {
+            return $this->memory[$id];
+        }
+
+        return [];
+    }
 }

@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace App\Cart\Domain\CommandHandler;
 
-use App\Cart\Application\Command\AddCartProductCommand;
 use App\Cart\Application\Service\CartService;
+use App\Cart\Command\DeleteCartProductCommand;
 use App\Cart\Infrastructure\CartRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class AddCartProductCommandHandler implements MessageHandlerInterface
+class DeleteCartProductCommandHandler implements MessageHandlerInterface
 {
     private CartService $cartService;
     private CartRepositoryInterface $cartRepository;
@@ -19,11 +19,11 @@ class AddCartProductCommandHandler implements MessageHandlerInterface
         $this->cartRepository = $cartRepository;
     }
 
-
-    public function __invoke(AddCartProductCommand $command): void
+    public function __invoke(DeleteCartProductCommand $command): void
     {
         $cart = $this->cartService->get($command->getCartId());
-        $cart->addProduct($command->getProductData());
+
+        $cart->deleteProduct($command->getProductId());
         $this->cartRepository->save($cart);
     }
 }

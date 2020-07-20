@@ -5,6 +5,9 @@ framework:
             messenger.bus.query.product: ~
             messenger.bus.event.product: ~
 
+            messenger.bus.command.cart: ~
+            messenger.bus.query.cart: ~
+
         transports:
             sync: 'sync://'
 

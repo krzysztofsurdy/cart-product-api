@@ -3,22 +3,24 @@ declare(strict_types=1);
 
 namespace App\Cart\Application\DTO;
 
-use App\Product\Domain\Product;
+use App\Cart\Application\DTO\Factory\AddCartProductRequestDTOFactory;
+use App\Product\Domain\ProductData;
 
 class AddCartProductRequestDTO
 {
-    public const LABEL_PRODUCT = 'product';
+    use AddCartProductRequestDTOFactory;
 
     private string $cartId;
-    private Product $product;
+
+    private ProductData $productData;
 
     public function getCartId(): string
     {
         return $this->cartId;
     }
 
-    public function getProduct(): Product
+    public function getProductData(): ProductData
     {
-        return $this->product;
+        return $this->productData;
     }
 }
