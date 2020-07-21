@@ -7,7 +7,7 @@ use App\Product\Application\DTO\ProductGetResponseDTO;
 use App\SharedKernel\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
-class ProductGetResponseDTODataValidator implements ValidatorInterface
+final class ProductGetResponseDTODataValidator implements ValidatorInterface
 {
     public static function validate(array $data): void
     {

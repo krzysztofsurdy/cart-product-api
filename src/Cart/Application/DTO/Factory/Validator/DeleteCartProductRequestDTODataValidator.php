@@ -7,7 +7,7 @@ use App\Cart\Application\DTO\DeleteCartProductRequestDTO;
 use App\SharedKernel\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
-class DeleteCartProductRequestDTODataValidator implements ValidatorInterface
+final class DeleteCartProductRequestDTODataValidator implements ValidatorInterface
 {
     public static function validate(array $data): void
     {

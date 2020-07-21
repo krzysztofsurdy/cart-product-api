@@ -8,7 +8,7 @@ use App\Product\Domain\Product;
 use App\SharedKernel\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
-class ProductDeleteRequestDTODataValidator implements ValidatorInterface
+final class ProductDeleteRequestDTODataValidator implements ValidatorInterface
 {
     public static function validate(array $data): void
     {
