@@ -53,6 +53,11 @@ This API should expose methods to:
    - User should not be able to add more than 3 products to the cart
    - You should return a total price of all the products in the cart
 
+## API Documentation
+
+API documentation is available under path [/v1/docs](https://cart-product-api.local/v1/docs) when 
+Docker containers are running.
+
 ## How to run
 
 ```bash
@@ -67,6 +72,9 @@ make composer
 
 # initialize database and products
 make init
+
+# add domain to hosts
+127.0.0.1 cart-product-api.local
 
 # make sure tests pass (phpunit), code is clean (phpstan) 
 make phpunit
@@ -101,6 +109,7 @@ Software used in project include:
 - [ramsey/uuid](https://github.com/ramsey/uuid)
 - [webmozart/assert](https://github.com/webmozart/assert)
 - [predis/predis](https://packagist.org/packages/predis/predis)
+- [Swagger](https://swagger.io/)
 
 ## License
 
