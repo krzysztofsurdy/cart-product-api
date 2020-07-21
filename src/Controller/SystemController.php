@@ -32,4 +32,13 @@ final class SystemController extends CoreController
             ]
         );
     }
+
+
+    /**
+     * @Route("/docs", methods={"GET"}, name="docs")
+     */
+    public function indexAction(): Response
+    {
+        return $this->render('docs.html');
+    }
 }

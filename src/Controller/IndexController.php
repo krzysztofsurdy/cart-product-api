@@ -15,9 +15,6 @@ final class IndexController extends CoreController
      */
     public function indexAction(): Response
     {
-        return self::createSuccessApiResponse(
-            null,
-            JsonResponse::HTTP_NO_CONTENT
-        );
+        return $this->redirectToRoute('docs');
     }
 }
