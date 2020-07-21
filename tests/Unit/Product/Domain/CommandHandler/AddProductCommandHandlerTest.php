@@ -17,14 +17,17 @@ class AddProductCommandHandlerTest extends TestCase
      */
     public function test_can_add_product(string $id, string $name, float $price): void
     {
+        // Given
         $productRepository = new ProductRepository();
         $productViewRepository = new ProductViewRepository();
 
         $handler = new AddProductCommandHandler($productRepository, $productViewRepository);
         $command = new AddProductCommand($id, $name, $price);
 
+        // When
         $handler($command);
 
+        // Then
         $product = $productRepository->get($id);
 
         $this->assertEquals($name, $product->getName());

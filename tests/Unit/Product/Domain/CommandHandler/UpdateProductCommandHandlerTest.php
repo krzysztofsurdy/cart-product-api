@@ -26,6 +26,7 @@ class UpdateProductCommandHandlerTest extends TestCase
 
     public function test_can_update_product(): void
     {
+        // Given
         $this->createProduct();
 
         $command = new UpdateProductCommand('test-id', ProductData::createFromArray([
@@ -34,8 +35,10 @@ class UpdateProductCommandHandlerTest extends TestCase
         ]));
         $handler = new UpdateProductCommandHandler($this->productRepository, $this->productViewRepository);
 
+        // When
         $handler($command);
 
+        // Then
         $product = $this->productRepository->get('test-id');
 
         $this->assertEquals('after update', $product->getName());

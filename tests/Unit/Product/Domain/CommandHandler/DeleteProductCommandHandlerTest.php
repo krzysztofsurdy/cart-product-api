@@ -25,13 +25,16 @@ class DeleteProductCommandHandlerTest extends TestCase
 
     public function test_can_delete(): void
     {
+        // Given
         $this->createProduct();
 
         $command = new DeleteProductCommand('test-id');
         $handler = new DeleteProductCommandHandler($this->productRepository);
 
+        // When
         $handler($command);
 
+        // Then
         $product = $this->productRepository->get('test-id');
         $this->assertInstanceOf(\DateTimeInterface::class, $product->getDeletedAt());
     }
