@@ -5,7 +5,7 @@ namespace App\Cart\Domain\Event;
 
 use App\SharedKernel\Event\CartEvent;
 
-class CartCreated extends CartEvent
+final class CartCreated extends CartEvent
 {
     public static function createFor(string $cartId): CartCreated
     {

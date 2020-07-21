@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Cart\Command;
 
-class CreateCartCommand
+final class CreateCartCommand
 {
     private string $id;
 

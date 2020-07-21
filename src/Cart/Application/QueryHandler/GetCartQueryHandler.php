@@ -9,7 +9,7 @@ use App\Cart\Domain\Exception\CartNotFoundException;
 use App\Cart\Infrastructure\CartRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class GetCartQueryHandler implements MessageHandlerInterface
+final class GetCartQueryHandler implements MessageHandlerInterface
 {
     private CartRepositoryInterface $cartRepository;
 

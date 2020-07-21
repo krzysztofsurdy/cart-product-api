@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Cart\Command;
 
-class DeleteCartProductCommand
+final class DeleteCartProductCommand
 {
     private string $cartId;
     private string $productId;

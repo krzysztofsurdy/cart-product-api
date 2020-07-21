@@ -8,7 +8,7 @@ use App\Product\Domain\Product;
 use App\Product\Infrastructure\ProductRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class GetProductQueryHandler implements MessageHandlerInterface
+final class GetProductQueryHandler implements MessageHandlerInterface
 {
     private ProductRepositoryInterface $productRepository;
 

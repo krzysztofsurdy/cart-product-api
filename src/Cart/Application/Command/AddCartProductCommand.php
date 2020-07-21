@@ -5,7 +5,7 @@ namespace App\Cart\Application\Command;
 
 use App\Product\Domain\ProductData;
 
-class AddCartProductCommand
+final class AddCartProductCommand
 {
     private string $cartId;
     private ProductData $productData;

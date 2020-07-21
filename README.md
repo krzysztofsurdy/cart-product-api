@@ -13,7 +13,7 @@ separate from product database to allow scalability of both microservices.
 
 ## Design
 
-Both APIs were are communicating inside each other through Symfony Messenger.
+Both APIs are communicating inside each other through Symfony Messenger.
 Both Cart and Product are designed using Domain Driven Design and Event Driven Design.
 Project communicates using CQRS (Command Query Responsibility Separation) pattern.
 Product's persistance layer uses Event Sourcing to store event in DB and replays them each time

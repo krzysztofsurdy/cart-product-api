@@ -7,7 +7,7 @@ use App\Cart\Domain\Cart;
 use App\Cart\Infrastructure\CartRepositoryInterface;
 use Predis\ClientInterface;
 
-class Redis implements CartRepositoryInterface
+final class Redis implements CartRepositoryInterface
 {
     private ClientInterface $redis;
 

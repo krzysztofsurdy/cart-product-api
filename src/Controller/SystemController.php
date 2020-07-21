@@ -5,11 +5,12 @@ namespace App\Controller;
 
 use Doctrine\DBAL\Connection;
 use Predis\ClientInterface;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(path="/system")
+ * @Route(path="/v1/system")
  */
 final class SystemController extends CoreController
 {

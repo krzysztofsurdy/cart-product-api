@@ -7,7 +7,7 @@ use App\Cart\Application\DTO\Factory\CartCreateResponseDTOFactory;
 use App\Cart\Domain\Cart;
 use JsonSerializable;
 
-class CartCreateResponseDTO implements JsonSerializable
+final class CartCreateResponseDTO implements JsonSerializable
 {
     use CartCreateResponseDTOFactory;
 

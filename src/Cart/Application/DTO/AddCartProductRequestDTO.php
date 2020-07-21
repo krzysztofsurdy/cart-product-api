@@ -6,7 +6,7 @@ namespace App\Cart\Application\DTO;
 use App\Cart\Application\DTO\Factory\AddCartProductRequestDTOFactory;
 use App\Product\Domain\ProductData;
 
-class AddCartProductRequestDTO
+final class AddCartProductRequestDTO
 {
     use AddCartProductRequestDTOFactory;
 

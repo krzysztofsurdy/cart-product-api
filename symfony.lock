@@ -414,10 +414,16 @@
             "config/packages/messenger.yaml"
         ]
     },
+    "symfony/mime": {
+        "version": "v5.1.2"
+    },
     "symfony/options-resolver": {
         "version": "v5.1.2"
     },
     "symfony/polyfill-intl-grapheme": {
+        "version": "v1.18.0"
+    },
+    "symfony/polyfill-intl-idn": {
         "version": "v1.18.0"
     },
     "symfony/polyfill-intl-normalizer": {

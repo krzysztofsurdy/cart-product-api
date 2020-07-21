@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-class CartService
+final class CartService
 {
     private MessageBusInterface $cartQueryBus;
     private MessageBusInterface $cartCommandBus;

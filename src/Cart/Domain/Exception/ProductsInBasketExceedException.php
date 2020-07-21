@@ -5,7 +5,7 @@ namespace App\Cart\Domain\Exception;
 
 use App\SharedKernel\Exception\ApiException;
 
-class ProductsInBasketExceedException extends ApiException
+final class ProductsInBasketExceedException extends ApiException
 {
     public function __construct()
     {

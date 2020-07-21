@@ -7,7 +7,7 @@ use App\Cart\Domain\Factory\CartProductFactory;
 use App\Product\Domain\ProductData;
 use JsonSerializable;
 
-class CartProduct implements JsonSerializable
+final class CartProduct implements JsonSerializable
 {
     use CartProductFactory;
 

@@ -14,7 +14,7 @@ use App\Product\Domain\ProductData;
 use App\SharedKernel\Aggregate\AggregateRootApply;
 use JsonSerializable;
 
-class Cart implements JsonSerializable
+final class Cart implements JsonSerializable
 {
     use AggregateRootApply;
     use CartFactory;

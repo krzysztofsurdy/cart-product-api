@@ -5,7 +5,7 @@ namespace App\Cart\Domain\Event;
 
 use App\SharedKernel\Event\CartEvent;
 
-class CartProductDeleted extends CartEvent
+final class CartProductDeleted extends CartEvent
 {
     private const LABEL_PRODUCT_ID = 'product_id';
 

@@ -6,7 +6,7 @@ namespace App\Cart\Infrastructure\CartRepository;
 use App\Cart\Domain\Cart;
 use App\Cart\Infrastructure\CartRepositoryInterface;
 
-class InMemory implements CartRepositoryInterface
+final class InMemory implements CartRepositoryInterface
 {
     private array $memory = [];
 

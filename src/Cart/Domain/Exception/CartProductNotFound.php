@@ -5,7 +5,7 @@ namespace App\Cart\Domain\Exception;
 
 use App\SharedKernel\Exception\ApiException;
 
-class CartProductNotFound extends ApiException
+final class CartProductNotFound extends ApiException
 {
     public function __construct(string $productId)
     {

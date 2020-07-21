@@ -6,7 +6,7 @@ namespace App\Cart\Domain\Event;
 use App\Product\Domain\ProductData;
 use App\SharedKernel\Event\CartEvent;
 
-class CartProductAdded extends CartEvent
+final class CartProductAdded extends CartEvent
 {
     private const LABEL_PRODUCT_DATA = 'product_data';
 

@@ -5,7 +5,7 @@ namespace App\Cart\Application\DTO;
 
 use App\Cart\Application\DTO\Factory\DeleteCartProductRequestDTOFactory;
 
-class DeleteCartProductRequestDTO
+final class DeleteCartProductRequestDTO
 {
     use DeleteCartProductRequestDTOFactory;
 
