@@ -8,15 +8,17 @@ use App\SharedKernel\Event\CartEvent;
 
 class CartProductAdded extends CartEvent
 {
+    private const LABEL_PRODUCT_DATA = 'product_data';
+
     public static function createFor(string $cartId, ProductData $productData): CartProductAdded
     {
         return new self($cartId, [
-            'product_data' => $productData->serialize()
+            self::LABEL_PRODUCT_DATA => $productData->serialize()
         ]);
     }
 
     public function getProductData(): ProductData
     {
-        return ProductData::createFromArray($this->payload['product_data']);
+        return ProductData::createFromArray($this->payload[self::LABEL_PRODUCT_DATA]);
     }
 }

@@ -54,11 +54,8 @@ final class ProductController extends CoreController
             $payload = json_decode(is_string($content) ? $content : '', true);
             $payload = ProductAddRequestDTO::createFromArray($payload);
 
-            $this->productService->add($payload);
-
-
             return self::createSuccessApiResponse(
-                null,
+                [$this->productService->add($payload)],
                 JsonResponse::HTTP_OK
             );
         } catch (\Throwable $exception) {

@@ -7,15 +7,17 @@ use App\SharedKernel\Event\CartEvent;
 
 class CartProductDeleted extends CartEvent
 {
+    private const LABEL_PRODUCT_ID = 'product_id';
+
     public static function createFor(string $cartId, string $productId): CartProductDeleted
     {
         return new self($cartId, [
-            'product_id' => $productId
+            self::LABEL_PRODUCT_ID => $productId
         ]);
     }
 
     public function getProductId(): string
     {
-        return $this->payload['product_id'];
+        return $this->payload[self::LABEL_PRODUCT_ID];
     }
 }

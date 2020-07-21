@@ -16,7 +16,7 @@ trait CartProductFactory
     {
         $cartProduct = new CartProduct();
 
-        $data['product'] = ProductData::createFromArray($data['product']);
+        $data[CartProduct::LABEL_PRODUCT] = ProductData::createFromArray($data[CartProduct::LABEL_PRODUCT]);
 
 
         $data = DTODataTypeDecorator::decorate($data, CartProduct::LABEL_QUANTITY, 'int');

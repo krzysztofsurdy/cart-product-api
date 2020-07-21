@@ -13,7 +13,7 @@ trait AddCartProductRequestDTOFactory
 
     public static function createFromArray(array $data): AddCartProductRequestDTO
     {
-        unset($data['product_id']);
+        unset($data[AddCartProductRequestDTO::LABEL_PRODUCT_ID]);
         AddCartProductRequestDTODataValidator::validate($data);
 
         $dto = new AddCartProductRequestDTO();

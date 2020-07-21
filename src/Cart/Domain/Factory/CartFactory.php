@@ -18,11 +18,11 @@ trait CartFactory
 
         $items = [];
 
-        foreach ($data['products'] as $productData) {
+        foreach ($data[Cart::LABEL_PRODUCTS] as $productData) {
             $items[] = CartProduct::createFromArray($productData);
         }
 
-        $data['products'] = $items;
+        $data[Cart::LABEL_PRODUCTS] = $items;
 
         $data = DTODataTypeDecorator::decorate($data, Cart::LABEL_PRODUCTS_QUANTITY, 'int');
         $data = DTODataTypeDecorator::decorate($data, Cart::LABEL_VALUE, 'float');

@@ -11,6 +11,8 @@ class CartCreateResponseDTO implements JsonSerializable
 {
     use CartCreateResponseDTOFactory;
 
+    public const LABEL_ID = 'id';
+
     private string $id;
 
     public function jsonSerialize(): array
