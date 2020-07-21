@@ -25,21 +25,20 @@ it is requested.
 
 Our catalog contains the following products:
 ID Title Price
-1 Fallout 1.99
-2 Don’t Starve 2.99
-3 Baldur’s Gate 3.99
-4 Icewind Dale 4.99
-5 Bloodborne 5.99
+* 1 Fallout 1.99
+* 2 Don’t Starve 2.99
+* 3 Baldur’s Gate 3.99
+* 4 Icewind Dale 4.99
+* 5 Bloodborne 5.99
 
 The API should expose methods to:
-● Add a new product
-    ○ Product name should be unique
-● Remove a product
-● Update product title and/or price
-● List all of the products
-    ○ There should be at least 5 products in the catalog (the ones in the table
-    above)
-    ○ This list should be paginated, max 3 products per page
+* Add a new product 
+**Product name should be unique
+* Remove a product
+* Update product title and/or price
+* List all of the products
+**There should be at least 5 products in the catalog (the ones in the table above)
+**This list should be paginated, max 3 products per page
 
 ### 2. Cart API
 
@@ -47,12 +46,12 @@ API that allow adding products to the carts. User can add multiple items of the 
 (max 10 units of the same product).
 
 This API should expose methods to:
-● Create a cart
-● Add a product to the cart
-● Remove product from the cart
-● List all the products in the cart
-    ○ User should not be able to add more than 3 products to the cart
-    ○ You should return a total price of all the products in the cart
+* Create a cart
+* Add a product to the cart
+* Remove product from the cart
+* List all the products in the cart
+**User should not be able to add more than 3 products to the cart
+**You should return a total price of all the products in the cart
 
 ## How to run
 
@@ -105,4 +104,4 @@ Software used in project include:
 
 ## License
 
-[MIT](LICENSE
+[MIT](LICENSE)
