@@ -8,9 +8,6 @@
         "ext-json": "*",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/migrations": "^3.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "phpstan/phpstan": "^0.12.32",
-        "phpunit/phpunit": "^9.2",
         "predis/predis": "^1.1",
         "prooph/event-sourcing": "^5.6",
         "prooph/event-store": "^7.5",
@@ -24,11 +21,15 @@
         "symfony/messenger": "5.1.*",
         "symfony/mime": "5.1.*",
         "symfony/twig-bundle": "5.1.*",
+        "symfony/validator": "5.1.*",
         "symfony/yaml": "5.1.*",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
-        "symfony/debug-bundle": "5.1.*"
+        "symfony/debug-bundle": "5.1.*",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.32",
+        "phpunit/phpunit": "^9.2"
     },
     "config": {
         "optimize-autoloader": true,
@@ -62,18 +63,11 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts",
-            "@phpstan"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts",
-            "@phpstan"
-        ],
-        "phpstan": [
-            "@php bin/console cache:warmup --env=dev",
-            "@phpstan-general"
-        ],
-        "phpstan-general": "vendor/bin/phpstan analyse -c phpstan.neon src --level=7 --no-progress --memory-limit=0"
+            "@auto-scripts"
+        ]
     },
     "conflict": {
         "symfony/symfony": "*"
