@@ -37,7 +37,7 @@ final class SystemController extends CoreController
     /**
      * @Route("/docs", methods={"GET"}, name="docs")
      */
-    public function indexAction(): Response
+    public function getDocsAction(): Response
     {
         return $this->render('/Swagger/docs.html');
     }

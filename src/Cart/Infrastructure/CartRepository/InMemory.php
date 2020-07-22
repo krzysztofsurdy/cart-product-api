@@ -17,7 +17,7 @@ final class InMemory implements CartRepositoryInterface
 
     public function get(string $id): array
     {
-        if (!isset($this->memory[$id])) {
+        if (isset($this->memory[$id])) {
             return $this->memory[$id];
         }
 

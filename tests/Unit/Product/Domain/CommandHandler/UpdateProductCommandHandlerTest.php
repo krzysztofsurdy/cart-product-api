@@ -28,10 +28,12 @@ class UpdateProductCommandHandlerTest extends TestCase
     {
         // Given
         $this->createProduct();
+        $name = 'after update';
+        $price = 13.13;
 
         $command = new UpdateProductCommand('test-id', ProductData::createFromArray([
-            'name' => 'after update',
-            'price' => 13.13
+            'name' => $name,
+            'price' => $price
         ]));
         $handler = new UpdateProductCommandHandler($this->productRepository, $this->productViewRepository);
 
@@ -41,8 +43,8 @@ class UpdateProductCommandHandlerTest extends TestCase
         // Then
         $product = $this->productRepository->get('test-id');
 
-        $this->assertEquals('after update', $product->getName());
-        $this->assertEquals(13.13, $product->getPrice());
+        $this->assertEquals($name, $product->getName());
+        $this->assertEquals($price, $product->getPrice());
     }
 
     private function createProduct(): void

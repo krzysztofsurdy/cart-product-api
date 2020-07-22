@@ -55,8 +55,19 @@ This API should expose methods to:
 
 ## API Documentation
 
+### Endpoint Documentation
+
 API documentation is available under path [/v1/docs](https://cart-product-api.local/v1/docs) when 
 Docker containers are running.
+
+### Code coverage
+
+Report is located in main directory under /reports path after launching command:
+```bash
+make phpunit
+```
+
+![coverage](docs/PhpUnit/coverage.png)
 
 ## How to run
 

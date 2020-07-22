@@ -121,7 +121,7 @@ final class Cart implements JsonSerializable
         return [
             self::LABEL_ID                => $this->id,
             self::LABEL_PRODUCTS          => array_map(function ($product) {
-                return $product;
+                return $product->jsonSerialize();
             }, $this->products),
             self::LABEL_PRODUCTS_QUANTITY => $this->productsQuantity,
             self::LABEL_VALUE             => $this->value

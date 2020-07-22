@@ -13,12 +13,15 @@ class ProductTest extends TestCase
 {
     public function test_can_create(): void
     {
+        // Given
+        $name = 'test-name';
+        $price = 12.32;
         // When
-        $product = $this->createProduct('test-name', 12.32);
+        $product = $this->createProduct($name, $price);
 
         // Then
-        $this->assertEquals('test-name', $product->getName());
-        $this->assertEquals(12.32, $product->getPrice());
+        $this->assertEquals($name, $product->getName());
+        $this->assertEquals($price, $product->getPrice());
         $this->assertNotEmpty($product->getId());
     }
 
@@ -42,12 +45,13 @@ class ProductTest extends TestCase
     {
         // Given
         $product = $this->createProduct('test-can-change-price', 32.12);
+        $newPrice = 123000.23;
 
         // When
-        $product->changePrice(123000.23);
+        $product->changePrice($newPrice);
 
         // Then
-        $this->assertEquals(123000.23, $product->getPrice());
+        $this->assertEquals($newPrice, $product->getPrice());
     }
 
     public function test_can_change_name(): void
@@ -65,18 +69,39 @@ class ProductTest extends TestCase
     public function test_can_serialize(): void
     {
         // Given
-        $product = $this->createProduct('serializable', 33.33);
+        $name = 'serializable';
+        $price = 33.33;
+        $product = $this->createProduct($name, $price);
         $product->delete();
 
         // When
         $serialized = $product->jsonSerialize();
 
         // Then
-        $this->assertEquals('serializable', $serialized[Product::LABEL_NAME]);
-        $this->assertEquals(33.33, $serialized[Product::LABEL_PRICE]);
         $this->assertNotEmpty($serialized[Product::LABEL_ID]);
         $this->assertNotEmpty($serialized[Product::LABEL_CREATED_AT]);
         $this->assertNotEmpty($serialized[Product::LABEL_DELETED_AT]);
+        $this->assertEquals($name, $serialized[Product::LABEL_NAME]);
+        $this->assertEquals($price, $serialized[Product::LABEL_PRICE]);
+    }
+
+    public function test_can_unserialize(): void
+    {
+        // Given
+        $name = 'serializable';
+        $price = 33.33;
+        $product = $this->createProduct($name, $price);
+        $product->delete();
+        $serialized = $product->jsonSerialize();
+
+
+        // When
+        $unserialized = Product::create(ProductData::createFromArray($serialized));
+
+        // Then
+        $this->assertEquals($product->getId(), $unserialized->getId());
+        $this->assertEquals($product->getName(), $unserialized->getName());
+        $this->assertEquals($product->getPrice(), $unserialized->getPrice());
     }
 
     private function createProduct(string $name, float $price): Product

@@ -15,6 +15,9 @@ trait ProductDataFactory
     {
         $productData = new ProductData();
 
+        unset($data['created_at']);
+        unset($data['deleted_at']);
+
         /** @var ProductData $productData */
         $productData = self::create($productData, $data);
 
