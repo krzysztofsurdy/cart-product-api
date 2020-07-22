@@ -67,7 +67,7 @@ Report is located in main directory under /reports path after launching command:
 make phpunit
 ```
 
-![coverage](docs/PhpUnit/coverage.png)
+![coverage](docs/PhpUnit/coverage_report.png)
 
 ## How to run
 
