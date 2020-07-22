@@ -6,7 +6,6 @@ namespace App\Tests\Unit\Cart\Domain\CommandHandler;
 use App\Cart\Application\Command\AddCartProductCommand;
 use App\Cart\Application\Service\CartService;
 use App\Cart\Domain\Cart;
-use App\Cart\Domain\CartProduct;
 use App\Cart\Domain\CommandHandler\AddCartProductCommandHandler;
 use App\Cart\Infrastructure\CartRepository\InMemory as CartRepository;
 use App\Product\Domain\ProductData;

@@ -102,14 +102,14 @@ class ProductComponentDiagram implements Diagram
         $product = $api->addComponent(
             'Product',
             'AggregateModel',
-            "Creates events",
+            'Creates events',
             TechnologyInterface::NULL
         );
 
         $eventStore = $api->addComponent(
             'Event Store',
             'EventStore',
-            "Event Store",
+            'Event Store',
             TechnologyInterface::NULL
         );
 
@@ -123,31 +123,58 @@ class ProductComponentDiagram implements Diagram
         $dtoFactory->usesComponent($dto, 'returns build object', TechnologyInterface::NULL);
         $dto->usesComponent($productController, 'returns request DTO', TechnologyInterface::NULL);
 
-        $productController->usesComponent($productService, 'passes DTO request to process further',
-            TechnologyInterface::NULL);
-        $productService->usesComponent($symfonyMessenger, 'packs data into Command/Query and throws into pipe',
-            TechnologyInterface::NULL);
-        $symfonyMessenger->usesComponent($symfonyMessengerHandler, 'handler is given message from pipe',
-            TechnologyInterface::NULL);
+        $productController->usesComponent(
+            $productService,
+            'passes DTO request to process further',
+            TechnologyInterface::NULL
+        );
+        $productService->usesComponent(
+            $symfonyMessenger,
+            'packs data into Command/Query and throws into pipe',
+            TechnologyInterface::NULL
+        );
+        $symfonyMessenger->usesComponent(
+            $symfonyMessengerHandler,
+            'handler is given message from pipe',
+            TechnologyInterface::NULL
+        );
 
-        $symfonyMessengerHandler->usesComponent($product, 'forces state change',
-            TechnologyInterface::NULL);
+        $symfonyMessengerHandler->usesComponent(
+            $product,
+            'forces state change',
+            TechnologyInterface::NULL
+        );
 
-        $product->usesComponent($eventStore, 'sends event to persist',
-            TechnologyInterface::NULL);
+        $product->usesComponent(
+            $eventStore,
+            'sends event to persist',
+            TechnologyInterface::NULL
+        );
 
 
-        $eventStore->usesContainer($db, 'sends serialized json to persist',
-            TechnologyInterface::NULL);
+        $eventStore->usesContainer(
+            $db,
+            'sends serialized json to persist',
+            TechnologyInterface::NULL
+        );
 
-        $eventStore->usesComponent($symfonyMessenger, 'sends event to persist',
-            TechnologyInterface::NULL);
+        $eventStore->usesComponent(
+            $symfonyMessenger,
+            'sends event to persist',
+            TechnologyInterface::NULL
+        );
 
-        $symfonyMessenger->usesComponent($symfonyMessengerSubscriber, 'subscriber is given message from pipe',
-            TechnologyInterface::NULL);
+        $symfonyMessenger->usesComponent(
+            $symfonyMessengerSubscriber,
+            'subscriber is given message from pipe',
+            TechnologyInterface::NULL
+        );
 
-        $symfonyMessengerSubscriber->usesContainer($db, 'sends query to database to persist view model',
-            TechnologyInterface::NULL);
+        $symfonyMessengerSubscriber->usesContainer(
+            $db,
+            'sends query to database to persist view model',
+            TechnologyInterface::NULL
+        );
 
         $systemComponentView = $this->create($api);
         $systemComponentView->addPerson($user);
@@ -162,7 +189,6 @@ class ProductComponentDiagram implements Diagram
         $systemComponentView->addElement($symfonyMessengerSubscriber);
         $systemComponentView->addElement($product);
         $systemComponentView->addElement($eventStore);
-
     }
 
     public function create(StaticStructureElement $element): StaticView
@@ -175,5 +201,4 @@ class ProductComponentDiagram implements Diagram
 
         return $systemComponentView;
     }
-
 }

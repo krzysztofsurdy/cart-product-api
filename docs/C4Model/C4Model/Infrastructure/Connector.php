@@ -5,6 +5,7 @@ namespace App\Docs\C4Model\C4Model\Infrastructure;
 
 use App\Docs\C4Model\C4Model\Domain\CartProductApiWorkspace;
 use StructurizrPHP\Client\Client;
+
 class Connector
 {
     /** @var Client */

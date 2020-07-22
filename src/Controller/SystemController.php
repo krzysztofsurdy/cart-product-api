@@ -5,7 +5,6 @@ namespace App\Controller;
 
 use Doctrine\DBAL\Connection;
 use Predis\ClientInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

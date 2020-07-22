@@ -46,7 +46,7 @@ class CartComponentDiagram implements Diagram
         $cart = $api->addComponent(
             'Cart',
             'AggregateModel',
-            "Creates events",
+            'Creates events',
             TechnologyInterface::NULL
         );
 
@@ -62,22 +62,40 @@ class CartComponentDiagram implements Diagram
         $cartController->usesComponent($dto, 'passes request to DTO', TechnologyInterface::NULL);
         $dto->usesComponent($cartController, 'returns request DTO', TechnologyInterface::NULL);
 
-        $cartController->usesComponent($cartService, 'passes DTO request to process further',
-            TechnologyInterface::NULL);
-        $cartService->usesComponent($symfonyMessenger, 'packs data into Command/Query and throws into pipe',
-            TechnologyInterface::NULL);
+        $cartController->usesComponent(
+            $cartService,
+            'passes DTO request to process further',
+            TechnologyInterface::NULL
+        );
+        $cartService->usesComponent(
+            $symfonyMessenger,
+            'packs data into Command/Query and throws into pipe',
+            TechnologyInterface::NULL
+        );
 
-        $symfonyMessengerHandler->usesComponent($cart, 'forces state change',
-            TechnologyInterface::NULL);
+        $symfonyMessengerHandler->usesComponent(
+            $cart,
+            'forces state change',
+            TechnologyInterface::NULL
+        );
 
-        $cart->usesComponent($eventStore, 'sends event to persist',
-            TechnologyInterface::NULL);
+        $cart->usesComponent(
+            $eventStore,
+            'sends event to persist',
+            TechnologyInterface::NULL
+        );
 
-        $eventStore->usesContainer($db, 'sends serialized json to persist',
-            TechnologyInterface::NULL);
+        $eventStore->usesContainer(
+            $db,
+            'sends serialized json to persist',
+            TechnologyInterface::NULL
+        );
 
-        $symfonyMessengerSubscriber->usesContainer($db, 'sends query to database to persist view model',
-            TechnologyInterface::NULL);
+        $symfonyMessengerSubscriber->usesContainer(
+            $db,
+            'sends query to database to persist view model',
+            TechnologyInterface::NULL
+        );
 
         $systemComponentView = $this->create($api);
         $systemComponentView->addPerson($user);
@@ -92,7 +110,6 @@ class CartComponentDiagram implements Diagram
         $systemComponentView->addElement($symfonyMessengerSubscriber);
         $systemComponentView->addElement($cart);
         $systemComponentView->addElement($eventStore);
-
     }
 
     public function create(StaticStructureElement $element): StaticView

@@ -110,7 +110,7 @@ make phpstan
 MAKEFILE in directory delivers commands:
 
           1. make install          - First installation
-          2. make build            - Build(update) container
+          2. make build            - Build(update) containers
           3. make build-pull       - Stops, gathers and build docker containers
           4. make run              - Launching docker containers
           5. make kill             - Stopping docker
@@ -120,7 +120,7 @@ MAKEFILE in directory delivers commands:
           9. make composer         - Launch 'composer install' in php-fpm
           10. make init            - Launch 'system:init' in php-fpm
           11. make phpunit         - Launch phpunit in php-fpm
-          12. make phpstan         - Launch phpstan winiphp-fpm
+          12. make phpstan         - Launch phpstan in php-fpm
 
 How to use: $ make command
 

@@ -76,7 +76,6 @@ class ContextDiagram implements Diagram
         $systemContainerView->addElement($db);
         $systemContainerView->addElement($tmpDB);
         $systemContainerView->addElement($api);
-
     }
 
     public function create(StaticStructureElement $element): StaticView
@@ -90,5 +89,4 @@ class ContextDiagram implements Diagram
         $contextView->addAllElements();
         return $contextView;
     }
-
 }

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Docs\C4Model\C4Model\Domain;
 
-
 use App\Docs\C4Model\C4Model\Domain\Diagram\DiagramFactory;
 use App\Docs\C4Model\C4Model\Infrastructure\Connector;
 

@@ -1,27 +1,27 @@
 all: help
 
 help:
-	@echo "\t  1. make install          - Pierwsza instalacja"
-	@echo "\t  2. make build            - Budowanie(update) kontenerów"
-	@echo "\t  3. make build-pull       - Zatrzymuje, pobiera i buduje kontenery dockera"
-	@echo "\t  4. make run              - Uruchamianie dockera"
-	@echo "\t  5. make kill             - Ubija kontenery"
-	@echo "\t  6. make run-bg           - Uruchamia docker w tle"
-	@echo "\t  7. make sh-php-fpm       - Dostęp do kontenera php-fpm"
-	@echo "\t  8. make sh-nginx         - Dostęp do kontenera nginx"
-	@echo "\t  9. make composer         - Uruchamia 'composer install' w php-fpm"
-	@echo "\t  10. make init            - Uruchamia 'system:init' w php-fpm"
-	@echo "\t  11. make phpunit         - Uruchamia testy phpunit w php-fpm"
-	@echo "\t  12. make phpstan         - Uruchamia testy phpstan w php-fpm"
+	@echo "\t  1. make install          - First installation"
+	@echo "\t  2. make build            - Build(update) containers"
+	@echo "\t  3. make build-pull       - Stops, gathers and builds docker containers"
+	@echo "\t  4. make run              - Launching docker containers"
+	@echo "\t  5. make kill             - Stopping docker"
+	@echo "\t  6. make run-bg           - Launching docker containers in background"
+	@echo "\t  7. make sh-php-fpm       - Access to php-fpm container"
+	@echo "\t  8. make sh-nginx         - Access to nginx container"
+	@echo "\t  9. make composer         - Launch 'composer install' in php-fpm"
+	@echo "\t  10. make init            - Launch 'system:init' in php-fpm"
+	@echo "\t  11. make phpunit         - Launch phpunit in php-fpm"
+	@echo "\t  12. make phpstan         - Launch phpstan in php-fpm"
 
 install: build-pull run-bg
 
 build:
-	@echo "Budowanie kontenerow"
+	@echo "building containers"
 	@docker-compose build
 
 build-pull:
-	@echo "Pobieranie kontenerów dockera i ich budowanie"
+	@echo "downloading and building containers"
 	@docker-compose stop
 	@docker-compose rm -f
 	@docker-compose pull && docker-compose build
@@ -30,42 +30,42 @@ start-machine:
 	@docker-machine start default
 
 run:
-	@echo "Uruchamiam dockera"
+	@echo "running dockera"
 	@docker-compose up --force-recreate
 
 run-bg:
-	@echo "Uruchamiam dockera w tle"
+	@echo "running docker in backgroud"
 	@docker-compose up -d
 
 kill:
-	@echo "Ubicie kontenerów"
+	@echo "killing containers"
 	@docker-compose kill
 
 sh-php-fpm:
-	@echo "sh w PHP-FPM"
+	@echo "sh in PHP-FPM"
 	@docker exec -it `docker-compose ps |grep -Eo '^[^ ]+' |grep php-fpm` sh
 
 sh-nginx:
-	@echo "sh w NGINX"
+	@echo "sh in NGINX"
 	@docker exec -it `docker-compose ps |grep -Eo '^[^ ]+' |grep nginx` sh
 
 composer:
-	@echo "Instalacja composera w php-fpm"
+	@echo "installing composera in php-fpm"
 	@docker exec -it `docker-compose ps |grep -Eo '^[^ ]+' |grep php-fpm` sh  -c \
 	'composer install;'
 
 init:
-	@echo "inicjalizacja systemu"
+	@echo "running init"
 	@docker exec -it `docker-compose ps |grep -Eo '^[^ ]+' |grep php-fpm` sh  -c \
 	'php bin/console system:init'
 
 phpunit:
-	@echo "odpalenie phpunit"
+	@echo "running phpunit"
 	@docker exec -it `docker-compose ps |grep -Eo '^[^ ]+' |grep php-fpm` sh  -c \
 	'php -dzend_extension=xdebug.so -dxdebug.coverage_enable=1 vendor/bin/phpunit --configuration phpunit.xml.dist'
 
 phpstan:
-	@echo "odpalenie phpunit"
+	@echo "running phpunit"
 	@docker exec -it `docker-compose ps |grep -Eo '^[^ ]+' |grep php-fpm` sh  -c \
 	'vendor/bin/phpstan analyse src tests --level=7 --memory-limit=-1'
 
