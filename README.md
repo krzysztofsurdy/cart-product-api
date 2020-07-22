@@ -135,6 +135,7 @@ Software used in project include:
 - [webmozart/assert](https://github.com/webmozart/assert)
 - [predis/predis](https://packagist.org/packages/predis/predis)
 - [Swagger](https://swagger.io/)
+- [Structurizr](https://github.com/structurizr-php/structurizr-php)
 
 ## License
 
