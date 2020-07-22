@@ -69,6 +69,20 @@ make phpunit
 
 ![coverage](docs/PhpUnit/coverage_report.png)
 
+### C4 Model
+
+#### API Context
+
+![ApiContext](docs/C4Model/ApiContext.png)
+
+#### Product API
+
+![ProductAPI](docs/C4Model/ProductAPI.png)
+
+#### Cart API
+
+![CartAPI](docs/C4Model/CartAPI.png)
+
 ## How to run
 
 ```bash
