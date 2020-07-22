@@ -73,7 +73,7 @@ make phpunit
 
 #### API Context
 
-![ApiContext](docs/C4Model/ApiContext.png)
+![ApiContext](docs/C4Model/APIContext.png)
 
 #### Product API
 
