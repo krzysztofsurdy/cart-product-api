@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: product-catalog-db
+    container_name: cart-product-api-db
     image: mysql
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
     environment:
@@ -17,26 +17,26 @@ services:
     networks:
       - default
   php-fpm:
-    container_name: product-catalog-php-fpm
+    container_name: cart-product-api-php-fpm
     build:
       context: ./docker/php-fpm
     depends_on:
       - mysql
-    working_dir: /product-catalog-api
+    working_dir: /cart-product-api
     environment:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
       - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@database:3306/${DATABASE_NAME}?serverVersion=5.7
     volumes:
-      - ./:/product-catalog-api:cached
+      - ./:/cart-product-api:cached
     networks:
       - default
   nginx:
-    container_name: product-catalog-nginx
+    container_name: cart-product-api-nginx
     image: nginx
     volumes:
-      - ./:/product-catalog-api
-      - ./:/product-catalog-api/vendor:cached
+      - ./:/cart-product-api
+      - ./:/cart-product-api/vendor:cached
       - ./docker/nginx/conf:/etc/nginx/conf.d
       - ./docker/nginx/ssl/:/etc/nginx/ssl/
     depends_on:
@@ -48,7 +48,7 @@ services:
     networks:
       - default
   redis:
-    container_name: product-catalog-redis
+    container_name: cart-product-api-redis
     image: redis:buster
     restart: always
     networks:

@@ -39,6 +39,6 @@ final class SystemController extends CoreController
      */
     public function indexAction(): Response
     {
-        return $this->render('docs.html');
+        return $this->render('/Swagger/docs.html');
     }
 }

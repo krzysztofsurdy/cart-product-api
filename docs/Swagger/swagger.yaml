@@ -1,0 +1,434 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is sample REST service that provides simple functionality of product store and shopping cart.
+  version: 1.0.0
+  title: Cart-Product API
+  contact:
+    email: surdykrzysztof@gmail.com
+tags:
+  - name: product
+    description: Product catalog API
+  - name: cart
+    description: Cart API
+  - name: system
+    description: Technical information
+schemes:
+  - https
+paths:
+  /product:
+    post:
+      tags:
+        - product
+      summary: Create new product
+      description: This method allows you to create a new product
+      operationId: "CreateProduct"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductPostRequest'
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/ProductCartPostResponse'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+    get:
+      tags:
+        - product
+      summary: Read your product
+      description: This method allows you to access products
+      operationId: "GetProduct"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: "Number of requested page"
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: "Limit of elements per page"
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/ProductGetResponse'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+    put:
+      tags:
+        - product
+      summary: Edit product
+      description: This method allows you to edit existing product
+      operationId: "UpdateProduct"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductPutRequest'
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/DefaultSuccessResponse'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+  /product/{id}:
+    delete:
+      tags:
+        - product
+      summary: Delete product
+      description: This method allows you to delete existing product
+      operationId: "DeleteProduct"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/DefaultSuccessResponse'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+  /cart:
+    post:
+      tags:
+        - cart
+      summary: Create new car
+      description: This method allows you to create a new cart
+      operationId: "CreateCart"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/ProductCartPostResponse'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+  /cart/{id}:
+    get:
+      tags:
+        - cart
+      summary: Read your cart
+      description: This method allows you to access cart
+      operationId: "GetCart"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: "Requested Cart ID"
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/CartGetResponseData'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+  /cart/product:
+    post:
+      tags:
+        - cart
+      summary: Add product to cart
+      description: This method allows you to add product to existing cart
+      operationId: "AddCartProduct"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CartProductPostDeleteRequest'
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/DefaultSuccessResponse'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+    delete:
+      tags:
+        - cart
+      summary: Delete product from cart
+      description: This method allows you to delete product from existing cart
+      operationId: "DeleteCartProduct"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CartProductPostDeleteRequest'
+      responses:
+        '200':
+          description: Successfull response
+          schema:
+            $ref: '#/definitions/DefaultSuccessResponse'
+        '400':
+          description: Something went wrong
+          schema:
+            $ref: '#/definitions/DefaultFailResponse'
+  /system/healthcheck:
+    get:
+      tags:
+        - system
+      summary: API Status
+      description: This method provides information about API status
+      operationId: "GetAPIStatus"
+definitions:
+  DefaultSuccessResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: true
+        description: "Result of request"
+      data:
+        type: object
+        example: {}
+        description: "Requested data"
+  DefaultFailResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: false
+        description: "Result of request"
+      message:
+        type: string
+        example: "Oops. Something went wrong."
+  ProductGetResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: true
+        description: "Result of request"
+      data:
+        $ref: '#/definitions/ProductGetResponseData'
+  ProductGetResponseData:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          type: object
+          example:
+          $ref: '#/definitions/Product'
+        description: "Result of request"
+      itemsTotal:
+        type: integer
+        example: 1
+        description: "Number of found elements"
+      page:
+        type: integer
+        example: 1
+        description: "Current page"
+      pages:
+        type: integer
+        example: 1
+        description: "Number of found pages"
+      limit:
+        type: integer
+        example: 3
+        description: "Number of elements per page"
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "15611950-cadc-11ea-931c-0242c0a81004"
+        description: "Product identifier"
+      name:
+        type: string
+        example: "Baldur's Gate"
+        description: "Product name"
+      price:
+        type: number
+        example: 3.99
+        description: "Product price"
+      created_at:
+        type: string
+        example: "2020-07-20 22:55:18"
+        format: "Y-m-d H:i:s"
+        description: "Date of product creation in format Y-m-d H:i:s"
+      deleted_at:
+        type: string
+        example: "2020-07-21 22:55:18"
+        format: "Y-m-d H:i:s"
+        description: "Date of product removal in format Y-m-d H:i:s"
+  ProductPostRequest:
+    type: object
+    required:
+      - name
+      - price
+    properties:
+      name:
+        type: string
+        example: "Bloodborne"
+        description: "Name of new product"
+      price:
+        type: number
+        example: 5.99
+        description: "Price of new product"
+  ProductPutRequest:
+    type: object
+    required:
+      - id
+      - name
+      - price
+    properties:
+      id:
+        type: string
+        example: "15611950-cadc-11ea-931c-0242c0a81004"
+        description: "Name of edited product"
+      name:
+        type: string
+        example: "Bloodborne"
+        description: "Name of edited product"
+      price:
+        type: number
+        example: 5.99
+        description: "Price of edited product"
+  ProductCartPostResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: true
+        description: "Result of request"
+      data:
+        type: array
+        items:
+          type: object
+          example:
+          $ref: '#/definitions/ProductCartPostResponseData'
+        description: "Result of request"
+  ProductCartPostResponseData:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "15611950-cadc-11ea-931c-0242c0a81004"
+        description: "Product identifier"
+  CartProductPostDeleteRequest:
+    type: object
+    required:
+      - cart_id
+      - product_id
+    properties:
+      cart_id:
+        type: string
+        example: "15611950-cadc-11ea-931c-0242c0a81004"
+        description: "Cart ID"
+      product_id:
+        type: string
+        example: "8194912-jsud-76s2-k87h-8s7dhsjs6d5s8"
+        description: "Product ID"
+  CartGetResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: true
+        description: "Result of request"
+      data:
+        type: object
+        example: {}
+        description: "Requested data"
+  CartGetResponseData:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "15611950-cadc-11ea-931c-0242c0a81004"
+        description: "Cart identifier"
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/CartProductData'
+      products_quantity:
+        type: integer
+        example: 3
+        description: "Number of all products in Cart"
+      value:
+        type: number
+        example: 11.97
+        description: "Total Cart value"
+  CartProductData:
+    type: object
+    properties:
+      product:
+        $ref: '#/definitions/CartProduct'
+      quantity:
+        type: integer
+        example: 3
+        description: "Quantity of product in basket"
+  CartProduct:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "15611950-cadc-11ea-931c-0242c0a81004"
+        description: "Product identifier"
+      name:
+        type: string
+        example: "Baldur's Gate"
+        description: "Product name"
+      price:
+        type: number
+        example: 3.99
+        description: "Product price"
+host: cart-product-api.local
+basePath: /v1
